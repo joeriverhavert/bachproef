@@ -11,7 +11,9 @@ import TexSoup
 import tabulate
 
 def main() -> None:
-    analysis_result = analyse([analyse_pdf, "bachproef-tin.pdf"])
+    analysis_result = analyse([analyse_pdf, "bachproef-tin.pdf"],
+                              [analyse_tex, "bachproef-tin.tex"]
+                            )
     print_result(analysis_result)
 
 def analyse(*analyser_functions) -> Dict[str, Any]:
@@ -162,3 +164,15 @@ def get_word_count(text: str) -> int:
 
 if __name__== "__main__":
     main()
+© 2020 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Help
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About
