@@ -27,7 +27,7 @@ def print_result(analysis_result: Dict[str, Any]) -> None:
     to_print = "### Metrics\n```\n" + tabulate.tabulate(data, tablefmt="github") + '\n```'
     # use newline char for url encoding instead of standard one
     # to get multiline output shown in release body
-    # to_print = to_print.replace('\n', '%0A')
+    to_print = to_print.replace('\n', '%0A')
     print(to_print)
 
 def analyse_pdf(file_name: str) -> Dict[str, Any]:
@@ -71,7 +71,8 @@ def get_occurence_amounts(node: Any, document_tree: Any) -> int:
     
 def get_document_tree(file_name: str) -> Any:
     # merge all tex's into one
-    os.system(f"./recursivelyMergeTex.awk < {file_name} > combined_temp.tex 2>/dev/null")
+    os.system("chmod +x recursivelyMergeTex.awk")
+    os.system(f"./recursivelyMergeTex.awk < {file_name} > combined_temp.tex")
     
     with open('combined_temp.tex') as f: data = f.read()
     tree = TexSoup.TexSoup(data)
@@ -102,6 +103,7 @@ def remove_unnecessary_nodes(document_tree: Any) -> None:
         'figure',
         'lstlisting',
         'verbatim',
+        'table',
         'printbibliography'
     ]
     for node in nodes_to_remove:
