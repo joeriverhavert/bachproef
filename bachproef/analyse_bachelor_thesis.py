@@ -11,9 +11,7 @@ import TexSoup
 import tabulate
 
 def main() -> None:
-    analysis_result = analyse([analyse_pdf, "bachproef-tin.pdf"],
-                              [analyse_tex, "bachproef-tin.tex"]
-                            )
+    analysis_result = analyse([analyse_pdf, "bachproef-tin.pdf"])
     print_result(analysis_result)
 
 def analyse(*analyser_functions) -> Dict[str, Any]:
