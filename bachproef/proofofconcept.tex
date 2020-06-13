@@ -5,29 +5,26 @@
 \chapter*{\IfLanguageName{dutch}{Proof of concept}{Proefafdruk}}
 \label{ch:Proof of concept}
 
-Het doel van dit hoofdstuk is om een idee te creëren van de omgeving waarin Cisco Identity Services Engine is geïmplementeerd. Hierbij is een uitgebreide uitleg over de elementen die aanwezig zijn binnen deze omgeving is terug te vinden in dit hoofdstuk. Ieder hardware apparaat is zorgvuldig beschreven, zo is o.a. informatie te vinden over de specificatie, de configuraties en de instellingen van de hardware componenten. Daarnaast werd ook de implementaties van de virtuele machines verder toegelicht.
+Het doel van dit hoofdstuk is om een idee te creëren van de omgeving waarin Cisco Identity Services Engine is geïmplementeerd. Hierbij is een uitgebreide uitleg over de elementen die aanwezig zijn binnen de omgeving van Cisco terug te vinden in dit hoofdstuk. Ieder hardware apparaat is zorgvuldig beschreven, onder andere is er informatie te vinden over de specificatie, de configuraties en de instellingen van de hardware componenten. Daarnaast zijn ook de implementaties van de virtuele machines verder toegelicht.
 \newline
 \newline
-Samen met al deze informatie zijn ook belangrijke schema’s terug te vinden die een visueel beeld geven over dit afgezonderd netwerk. 
-Vervolgens is er de sectie die de enquête bespreekt. In deze sectie is voornamelijk informatie terug te vinden omtrent de enquête bevraging. 
+Samen met deze informatie zijn belangrijke schema’s weer verwerkt in dit hoofdstuk, die een visueel beeld geven over dit afgezonderd netwerk. 
+Vervolgens is er de sectie die de enquête bespreekt. De enquête bespreking bevat voornamelijk informatie die terug te vinden in de sectie \ref{sec:enquête}. 
 
 \section{Cisco Identity Services Engine omgeving}
 
-Voor de implementaties en testen van Cisco Identity Services Engine en zijn benodigde services, is er een omgeving vereist. Deze omgeving werd voorzien door een Belgische aanbieder van digitale televisie, breedband-internet, mobiele telefonie, enz. Deze Belgische aanbieder staat gekend als Telenet Group N.V. Implementaties en de testen van Cisco Identity Services Engine en zijn benodigde services is uitgewerkt in een Telenet thuisnetwerk.
+Voor de implementaties en testen van Cisco Identity Services Engine en zijn benodigde use cases is er een omgeving vereist. Deze omgeving is voorzien door een Belgische aanbieder van digitale televisie, breedband-internet, mobiele telefonie, enz. Deze Belgische aanbieder staat gekend als Telenet Group N.V. Implementaties en de testen van Cisco Identity Services Engine en met zijn benodigde use cases is uitgewerkt in een Telenet thuisnetwerk.
 \newline
-Met als gevolg beschikt dit thuisnetwerk over een aantal Access Points en een Telenet Modem. De kabelverbinding die data verzend vanuit Telenet naar de modem in het thuisnetwerk is een coaxkabel. M.a.w. is het thuisnetwerk verbonden met het Wide Area Network(ook gekend als WAN) dankzij de Telenet's coaxkabel.
+Zoals elk thuisnetwerk dat voorzien is door een Belgische internet aanbieder bevat het thuisnetwerk een aantal Telenet Access Points en een Telenet modem. De kabelverbinding die data verzend vanuit de Telenet centrale naar de Telenet modem is een coaxkabel. Het is dankzij de coaxkabel dat het thuisnetwerk verbonden is met het Wide Area Network (ook gekend als WAN).
 \newline
 \newline
-Om de essentiële componenten van dit thuisnetwerk te beschermen tegen breuk, is de implementatie verder uitgewerkt in een afgezonderd netwerkje. Dit wordt mogelijk gemaakt met behulp van een virtuele opensource router/firewall zoals Pfsense. Dit virtuele routerje dient als gateway voor de verschillende VLAN’s, waarbij het thuisnetwerk gebruikt zal worden als ‘uplink’ naar het internet. 
+Om de essentiële componenten van dit thuisnetwerk te beschermen tegen breuk, is de implementatie verder uitgewerkt in een afgezonderd netwerk. Dit wordt mogelijk gemaakt met behulp van een virtuele opensource router/firewall zoals Pfsense. Dit virtuele routerje dient als gateway voor de verschillende vlan’s waarbij het thuisnetwerk gebruikt zal worden als ‘uplink’ naar het internet. 
 
 \subsection{Server VMware ESXi}
-Het afgezonderd netwerkje bestaat uit een rack server waarop een viertal virtuele machines draaien. Deze virtuele machine zijn: Cisco Identity Service Engine, het virtuele routerje, genaamd Pfsense en twee  Windows Server 2019 datacenters machines. De creatie van deze virtuele machines wordt mogelijk gemaakt door VMware ESXi. VWware ESXi is een type-1 hypervisor van enterprise-klasse, ontwikkeld door VMware voor het inzetten en bedienen van virtuele machines. 
+Het afgezonderd netwerkje bestaat uit een rack server waarop een viertal virtuele machines draaien. Deze virtuele machine zijn: Cisco Identity Service Engine, het virtuele routerje, genaamd Pfsense en twee  Windows Server 2019 datacenters machines. Dit wordt eenvoudig weergegeven in figuur \ref{fig:vms} die de virutele machines weergeeft. De creatie van deze virtuele machines is mogelijk gemaakt door VMware ESXi. VWware ESXi is een type-1 hypervisor van enterprise-klasse, ontwikkeld door VMware voor het inzetten en bedienen van virtuele machines. 
 \newline
 \newline
-De ESXi server is geconfigureerd door het gebruik van een ‘bootable usb’. Deze bootable usb bevatte al nodige software om de server te voorzien met VMware ESXi. Vervolgens werd de server geconfigureerd met een aantal belangrijke settings, zoals het instellen van een IP adres, subnet mask, raid controller, enz.
-\newline
-\newline
-Volgende settings zijn voorzien op deze ESXi server: 
+De ESXi server is geconfigureerd door het gebruik van een ‘bootable usb’. Deze bootable usb bevatte al nodige software om de server te voorzien met VMware ESXi. Vervolgens werd de server geconfigureerd met een aantal belangrijke settings, zoals het instellen van een IP adres, subnet mask, raid controller, enz. Waarbij zijn volgende settings voorzien op deze ESXi server: 
 
 \begin{itemize}
 	\item IP adres: 192.168.0.183
@@ -39,22 +36,24 @@ Volgende settings zijn voorzien op deze ESXi server:
 \begin{figure}[H]
 	\centering
 	\includegraphics[height=0.3\textheight]{servervm.png}
-	\caption{Deze afbeelding geeft een visueel beeld weer van de bestaande virtuele machines in de ESXi server.}
+	\caption{Virtuele machines in ESXi server}
+	\label{fig:vms}
 \end{figure}
 
 \newpage
-Door configuratie van deze IP instellingen, is de VMware ESXi toeganglijk via de webbrowser. Bovendien is de hard disk drive ingesteld als raid 10. Raid 10 is een hybride combinatie tussen raid 1 en raid 0. Waarbij men de snelheid van striping met de veiligheid van mirroring combineert. 
+Door de configuratie van deze IP instellingen, is de VMware ESXi server toeganglijk via de webbrowser. Virtuele machines kunnen via de webbrowser beheerd, verwijderd en gecreëerd worden. Daarnaast werd de hard disk drive ingesteld met een RAID controller. RAID, een afkoring voor Redundant array of independent disks is een dataopslagtechnologie waarbij meerdere harde schijven gecombineerd worden tot één of meer logische virtuele opslageenheden. Dit heeft als doel om de veiligheid, snelheid en de capaciteit te kunnen vergroten. Hierbij is op de VMware ESXi RAID 10 geconfigueerd. RAID 10 is een hybride combinatie tussen RAID 1 en RAID 0. Waarbij men de snelheid van striping met de veiligheid van mirroring combineert. 
 \newline
 \newline
-Dit is de veiligste en snelste methode maar ook de duurste. Het is een dure methode omdat er gebruik wordt gemaakt van raid 1, dus voor iedere 1TB aan opslagruimte is er ook 1TB aan mirror ruimte nodig, in combinatie met raid 0 waardoor er veel schijven nodig zijn. 
+Dit is de veiligste en snelste methode maar ook de duurste. Het is een dure methode omdat er gebruik wordt gemaakt van RAID 1, dus voor iedere 1TB aan opslagruimte is er ook 1TB aan mirror ruimte nodig, in combinatie met RAID 0 waardoor er veel fysieke harde schijven nodig zijn. In figuur \ref{fig:Raid10} wordt een voorbeeld van een RAID 10 schema weergegeven.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[height=0.25\textheight]{Raid10.png}
-	\caption{Deze afbeelding geeft een visueel beeld weer van een RAID 10 configuratie.}
+	\caption{Configuratie schema RAID 10 (\cite{Raid10}).}
+	\label{fig:Raid10}
 \end{figure}
 
-In deze server opstelling zijn drie van de vier fysieke ethernet adapters gebruikt. Deze adapters zijn op hun beurt verbonden met een virtuele switch. Elk van deze fysieke adapter heeft een andere functie. Deze functies zijn terug te vinden in onderstaande lijst. 
+Vervolgens zijn er in de VMware ESXi server opstelling drie van de vier fysieke ethernet adapters gebruikt. Deze adapters zijn op hun beurt verbonden met een virtuele switch. Elk van de fysieke adapters heeft een andere functie die weergegeven zijn in de onderstaande lijst. 
 
 \begin{itemize}
 	\item vmnic0,is de fysieke adapter die verbonden is met de virtuele switch, genaamd 'VSwitch0'.
@@ -66,45 +65,45 @@ In deze server opstelling zijn drie van de vier fysieke ethernet adapters gebrui
 \subsubsection{Virtuele switches}
 \subsubitem{\bf VSwitch0}
 \newline
-De 'VSwitch0' is een virtuele switch die voorzien is om de VMware ESXi te contacteren via de webbrower. Deze switch is ingesteld met vlan id 0. Dit betekent m.a.w. dat hiervoor geen vlan identificatie is voorzien. 
+De 'VSwitch0' is een virtuele switch die voorzien is om de VMware ESXi server te contacteren via de webbrowser. Op figuur \ref{fig:Vswitch0} ziet men dat de 'VSwitch0' is ingesteld met vlan id 0, dat geen vlan identificatie voorziet. 
 \newline
 \newline
-Wanneer gebruikers surfen naar "https://192.168.0.183/", dan passeert deze data langs de fysieke poort vmnic0. Vervolgens stuurt de fysieke poort de data door naar de VSwitch0. Wanneer de data op de VSwitch0 terecht komt, stuurt hij op zijn beurt de data door naar de VMKernel poort.
+Data passeert deze interface wanneer gebruikers surfen naar "https://192.168.0.183". Vervolgens passeert de data langs de fysieke poort vmnic0 die data doorgeeft aan de VSwitch0. Wanneer data terecht komt op de VSwitch0, stuurt hij op zijn beurt de data door naar de VMKernel poort.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.7\textwidth]{VSwitch0.png}
-	\caption{Deze afbeelding geeft een visueel beeld weer van de 'VSwitch0' topologie.}
+	\includegraphics[width=0.8\textwidth]{VSwitch0.png}
+	\caption{Topologie van 'VSwitch0'}
+	\label{fig:Vswitch0}
 \end{figure}
 
 \subsubitem{\bf Sub\textunderscore switch}
 \newline
-De 'Sub\textunderscore switch' is een virtuele switch die gebruikt wordt als WAN interface voor de Pfsense. De WAN interface voorziet data overdracht van de thuis LAN netwerk naar het afgezonderd LAN netwerk. M.a.w. is connectie met het afgezonderd netwerkje mogelijk via deze interface. Bovendien is deze virtuele switch ook gebruikt voor de jumphost. Deze jumphost maakt het mogelijk om remote desktop protocol connecties te maken met de virtuele machines binnen het afgezonderd netwerkje. 
-\newline
-\newline
-Vervolgens is deze virtuele switch ook ingesteld met vlan id 0. Dit betekend m.a.w. dat hiervoor geen vlan identificatie is voorzien. 
+Op figuur \ref{fig:subswitch} ziet men dat de 'Sub\textunderscore switch' een virtuele switch is die gebruikt wordt voor WAN interface van de Pfsense. De Wide Area Network interface voorziet data overdracht van het thuisnetwerk naar het afgezonderd LAN netwerk. Hierdoor is connectie met het afgezonderd netwerk mogelijk via deze interface. Bovendien wordt deze virtuele switch ook gebruikt door de jumphost om remote desktop protocol connecties te maken met de virtuele machines binnen het afgezonderd LAN netwerk. 
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.7\textwidth]{Subswitch.png}
-	\caption{Deze afbeelding geeft een visueel beeld weer van de 'Sub\textunderscore switch' topologie.}
+	\includegraphics[width=0.8\textwidth]{Subswitch.png}
+	\caption{Topologie van 'Sub\textunderscore switch'}
+	\label{fig:subswitch}
 \end{figure}
 
 \subsubitem{\bf Cisco\textunderscore switch}
 \newline
-De 'Cisco\textunderscore switch'  is terug een virtuele switch. Deze switch wordt gebruikt om connectie te maken met alle apparaten achterliggend de fysieke Cisco switch. Dit betekent wanneer eind apparaten met de Cisco switch verbinden, dan zal de data passeren via deze virtuele switch. Bovendien bevinden alle andere virtuele machine zich in deze omgeving. Met als gevolgd is deze virtuele switch  ingesteld met vlan id 10. Dit betekent dat enkel data vanuit vlan 10 wordt doorgestuurd naar de voorziene machines.
+Ten slot is er de 'Cisco\textunderscore switch' die gebruikt wordt om connectie te maken met alle apparaten achterliggend de fysieke Cisco switch. Wanneer eind apparaten met de Cisco switch verbinden, dan zal de data passeren via de 'Cisco\textunderscore switch'. Bovendien is op figuur \ref{fig:Ciscoswitch} te zien dat alle virtuele machines zich in deze omgeving bevinden. Dit zorgt er voor dat de Cisco\textunderscore switch ingesteld is met vlan id 10, waarbij enkel data vanuit vlan 10 wordt doorgestuurd naar de voorziene eind apparaten.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.7\textwidth]{CiscoSwitch_vmware.png}
-	\caption{Deze afbeelding geeft een visueel beeld weer van de 'Cisco\textunderscore switch' topologie.}
+	\includegraphics[width=0.8\textwidth]{CiscoSwitch_vmware.png}
+	\caption{Topologie van 'Cisco\textunderscore switch'}
+	\label{fig:Ciscoswitch}
 \end{figure}
 
 \subsubsection{Server ESXi specificaties}
-De voorziene ESXi server is van het merk International Business Machines Corporation, gekend als IBM. Deze server werd oorsprongelijk gebruikt in de productie omgeving van Axians, maar is sinds kort een test server. 
+De ESXi server is van het merk International Business Machines Corporation, gekend als IBM. Deze server werd oorsprongelijk gebruikt in de productie omgeving van Axians, maar wordt sinds kort als test server gebruikt. In figuur \ref{fig:VmwareSer} ziet men een afbeelding van de IBM ESXi server.
 \newline
 \newline
-Hierbij heeft ‘System x3350 M3’, gekend binnen Axians als ‘de oude shr-esx-04 server’, de volgende specificaties:
+Het model van de VMware ESXi server is ‘System x3350 M3’ dat gekend staat binnen Axians als ‘de oude shr-esx-04 server’. De IBM ‘System x3350 M3’ bevat volgende specificaties:
 
 \begin{itemize}
 	\item Vormfactor: 1U Rack
@@ -133,47 +132,33 @@ Hierbij heeft ‘System x3350 M3’, gekend binnen Axians als ‘de oude shr-esx
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.5\textwidth]{serveresxi.png}
-	\caption{Deze afbeelding heeft de ESXI server weer. }
+	\caption{Foto ESXi VMware server}
+	\label{fig:VmwareSer}
 \end{figure}
 
 \subsection{Cisco switch}
-Naast de ESXi server, bestaat de Cisco Identity Services Engine omgeving ook uit een Cisco switch. Deze fysieke switch werd geconfigureerd, zodanig dat de Cisco Identity Services Engine virtuele machine kan communiceren met deze switch. Om deze communicatie mogelijk te maken, zijn er bepaalde configuraties uitgevoerd op deze fysieke switch. Deze noodzakelijke configuraties speelden een belangrijke rol in de configuratie van de 'Port-based network access control' use case. 
+Naast de VMware ESXi server, bestaat de Cisco Identity Services Engine omgeving ook uit een Cisco switch. Dankzij een aantal configuraties op de Cisco switch kan de Cisco Identity Services Engine virtuele machine communiceren met de fysieke switch. Deze noodzakelijke configuraties speelden een belangrijke rol in de configuratie van de 'Port-based network access control' use case. 
 \newline
 \newline
-Daarnaast zijn er ook een aantal basis configuraties uitgevoerd op deze switch. Hierdoor wordt communicatie tussen het afgezonderd netwerk en de eind apparaten achterliggend de switch ook mogelijk. Deze informatie is terug te vinden in de volgende subsectie.  
+Door een aantal basis configuraties op deze switch uit te voeren wordt communicatie tussen het afgezonderd netwerk en de eind apparaten die zich achter de Cisco switch bevinden ook mogelijk. Deze informatie is terug te vinden in de sectie \ref{sec:config}.
 
 \subsubsection{Configuratie}
-Om te beginnen werd de Cisco switch met een aantal commando's geconfigureerd. Deze configuraties beveiligen het network apparaat. M.a.w. zijn secrets, line password en passwords enqryption commando's uitvoert om inbreuk tegen te gaan. 
-\newline
-\newline
-Om te communiceren met het afgezonderd netwerk, werd Gigabit Ethernet 0/1 geconfigureerd met volgende settings: 
+\label{sec:config}
+Als eerst zijn een aantal commando's uitgevoerd die het netwerk apparaat beveiligen met een secret, line passwords en password encryption om inbreuk tegen te gaan. Vervolgens werd Gigabit Ethernet 0/1 geconfigureerd met de gepaste trunk settings om de gobale communicatie mogelijk te maken. Een trunk configuratie maakt data overdracht van de verschillende vlan's mogelijk. Volgende twee trunk commando's zijn hiervoor uitvoerd: 
 
 \begin{itemize}
 	\item switchport mode trunk
 	\item switchport trunk allow vlan 10 
 \end{itemize}
 
-Deze configuratie maakt data overdracht van de verschillende vlan's mogelijk. Deze poort werd rechtsverbonden met één van de interfaces op de ESXi server. Vervolgens werd een vlan gecreeërt en kreeg het ip adres '192.168.17.5' met subnet mask '255.255.255.0' toegewezen. Deze instellingen behoorde tot de basis configuratie van de Cisco switch.
-
-\begin{figure}[H]
-	\centering
-	\subfloat{{\includegraphics[width=3cm]{Switch_config1.png} }}%
-	\qquad
-	\subfloat{{\includegraphics[width=3cm]{Switch_config2.png} }}%
-	\qquad
-	\subfloat{{\includegraphics[width=3cm]{Switch_config3.png} }}%
-	\caption{Bovenstaande foto's geven de running-config van de Cisco switch weer. Waarbij een aantal interfaces geconfigureerd zijn met het 'Policy-based network access control' use case.}%
-	\label{fig:RunningConfig}%
-\end{figure}
-
-Vermits poort Gigabit Ethernet 0/1 geconfigureerd is om verbinding te maken met de server ESXi, zijn de overige poorten bedoeld voor de communicatie met de eind apparaten. Met als gevolg dat alle overige poorten ingesteld zijn met het 'Port-based network access control' use case.
+Gigabit Ethernet 0/1 werd rechtsverbonden met één van de interfaces op de VMware ESXi server, waarbij de virtuele switch ingesteld werd met vlan id 0 dat gelijk staan aan geen vlan identificatie. Vervolgens werd
+op de Cisco switch vlan 10 gecreeërd met ip adres '192.168.17.5' en met subnet mask '255.255.255.0'. Vermits de interface Gigabit Ethernet 0/1 geconfigureerd is om verbinding te maken met de VMware ESXi server, zijn de overige interfaces bedoeld voor de communicatie met de eind apparaten. 
 \newline
 \newline
-Om de 'Port-based network access control' use case mogelijk te maken, werd een nieuw AAA model ingesteld. Vervolgens werd dit AAA model met een radius server geïnitialiseerd. De dot1x aaa authentication methode werd met zijn standaard netwerk group mee configureerd. 
+Om de 'Port-based network access control' use case te implementeren, werd een nieuw AAA model ingesteld. Dit AAA model werd vervolgens geïnitialiseerd met een radius server die gelijk staat aan het Internet Protocol adres van Cisco Identity Services Engine. Ten slotte werd de dot1x aaa authentication methode met zijn standaard netwerk groep mee configureerd. 
 \newline
 \newline
-Dot1x system-auth-control werd hierbij mee vastgelegd. Om de configuratie te beëindeigen, werden alle poorten voorzien van de nodige 'Port-based NAC' configuraties. Deze configuraties zijn in de volgende lijst weergegeven.
-
+Om de configuraties van de Cisco switch te beëindeigen, werd dot1x system-auth-control vastgelegd en werden alle poorten voorzien van de nodige 'Port-based access control' configuraties. Figuur \ref{fig:RunningConfig} toont de running config van de Switch Cisco, daarnaast zijn alle nodige commando's in onderstaande lijst ook weergegeven.
 \begin{itemize}
 	\item \#enable
 	\item \#config t
@@ -193,12 +178,20 @@ Dot1x system-auth-control werd hierbij mee vastgelegd. Om de configuratie te be�
 	\item (config-if-range)\#end
 \end{itemize}
 
-\subsubsection{Communicatie}
-Om deze systemen met elkaar te laten communiceren, werden 1G cat5e ethernet kabels gebruikt. Deze Unshielded Twisted Pair Ethernet kabels halen snelheden tot 1000 Mbit/s met een doorvoersnelheid van 100mhz. Wat geschikt is voor dit afgezonderd netwerk.
+\begin{figure}[H]
+	\centering
+	\subfloat{{\includegraphics[width=3cm]{Switch_config1.png} }}%
+	\qquad
+	\subfloat{{\includegraphics[width=3cm]{Switch_config2.png} }}%
+	\qquad
+	\subfloat{{\includegraphics[width=3cm]{Switch_config3.png} }}%
+	\caption{Running config van de Cisco switch}%
+	\label{fig:RunningConfig}%
+\end{figure}
+Verder zijn 1G cat5e ethernet kabels gebruikt om de hardware componenten met elkaar te laten communiceren. De Unshielded Twisted Pair Ethernet kabels halen snelheden tot 1000 Mbit/s met een doorvoersnelheid van 100mhz. Wat geschikt is voor dit afgezonderd netwerk.
 
 \subsubsection{Cisco switch specificaties}
-Deze switch is van het merk Cisco Systems, en behoord tot de ‘Catalyst 2960-CX’ series. Deze Cisco switch staat nu gekend binnen Axians als de ‘Demo switch’. 
-In onderstaande lijst vindt u de specificaties van de Cisco Catalyst 2960-CX serie switch:
+De Cisco switch behoord tot de ‘Catalyst 2960-CX’ series die nu gekend staat binnen Axians als de ‘Demo switch’. Hierbij vindt men in onderstaande lijst de specificaties van de Cisco Catalyst 2960-CX serie switch:
 
 \begin{itemize}
 	\item Power over Ethernet:
@@ -218,11 +211,6 @@ In onderstaande lijst vindt u de specificaties van de Cisco Catalyst 2960-CX ser
     \end{itemize}
 \end{itemize}
 
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.5\textwidth]{ciscoswitch.png}
-	\caption{Deze afbeelding heeft de Cisco switch weer. }
-\end{figure}
 
 \subsection{Virtuele machines}
 \subsubsection{Cisco Identity Services Engine}
@@ -341,6 +329,7 @@ Dit is een type virtueel network dat gerealiseerd wordt op de datalinklaag. Dit 
 	\label{fig:example}%
 \end{figure}
 \section{Cisco Identity Services Engine enquête}
+\label{sec:enquête}
 Om een link te leggen met de resultaten van de uitgevoerde testen, werd een enquête of een formulier opstelt. Deze enquête is als onderliggende basis gebruikt bij de analyse van de resultaten die verkregen werden door de fysieke testen. Zoals in vorige hoofdstukken vermeld, is deze enquête een opiniepeiling. Waarbij een aantal vragen gesteld zijn aan personen die reeds gekend zijn met Cisco Identity Services Engine. Hierdoor is de doelgroep van deze enquête beperkt tot de Cisco Identity Services Engine specialisten.
 \newline
 \newline
