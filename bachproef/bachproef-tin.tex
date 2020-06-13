@@ -1,7 +1,3 @@
-%===============================================================================
-% LaTeX sjabloon voor de bachelorproef toegepaste informatica aan HOGENT
-% Meer info op https://github.com/HoGentTIN/bachproef-latex-sjabloon
-%===============================================================================
 \documentclass{bachproef-tin}
 
 \usepackage{hogent-thesis-titlepage} % Titelpagina conform aan HOGENT huisstijl
@@ -9,24 +5,20 @@
 \usepackage{floatrow,enumitem,csquotes}
 
 %%---------- Documenteigenschappen ---------------------------------------------
-% TODO: Vul dit aan met je eigen info:
+
 
 % De titel van het rapport/bachelorproef
 \title{Een bedrijfsnetwerk beter beveiligen en beheren met behulp van Cisco Identity Services Engine}
 
-% Je eigen naam
+
 \author{Joeri Verhavert}
 
-% De naam van je promotor (lector van de opleiding)
+
 \promotor{Olivier Rosseel}
 
-% De naam van je co-promotor. Als je promotor ook je opdrachtgever is en je
-% dus ook inhoudelijk begeleidt (en enkel dan!), mag je dit leeg laten.
+
 \copromotor{Dean De Blieck}
 
-% Indien je bachelorproef in opdracht van/in samenwerking met een bedrijf of
-% externe organisatie geschreven is, geef je hier de naam. Zoniet laat je dit
-% zoals het is.
 \instelling{Axians - Fit IT}
 
 % Academiejaar
@@ -44,12 +36,7 @@
 
 \begin{document}
 
-%---------- Taalselectie -------------------------------------------------------
-% Als je je bachelorproef in het Engels schrijft, haal dan onderstaande regel
-% uit commentaar. Let op: de tekst op de voorkaft blijft in het Nederlands, en
-% dat is ook de bedoeling!
 
-%\selectlanguage{english}
 
 %---------- Titelblad ----------------------------------------------------------
 \inserttitlepage
@@ -67,43 +54,17 @@
 
 %---------- Lijst figuren, afkortingen, ... ------------------------------------
 
-% Indien gewenst kan je hier een lijst van figuren/tabellen opgeven. Geef in
-% dat geval je figuren/tabellen altijd een korte beschrijving:
-%
-%  \caption[korte beschrijving]{uitgebreide beschrijving}
-%
-% De korte beschrijving wordt gebruikt voor deze lijst, de uitgebreide staat bij
-% de figuur of tabel zelf.
 
 \listoffigures
 \listoftables
-
-% Als je een lijst van afkortingen of termen wil toevoegen, dan hoort die
-% hier thuis. Gebruik bijvoorbeeld de ``glossaries'' package.
-% https://www.overleaf.com/learn/latex/Glossaries
-
-%---------- Kern ---------------------------------------------------------------
-
-% De eerste hoofdstukken van een bachelorproef zijn meestal een inleiding op
-% het onderwerp, literatuurstudie en verantwoording methodologie.
-% Aarzel niet om een meer beschrijvende titel aan deze hoofstukken te geven of
-% om bijvoorbeeld de inleiding en/of stand van zaken over meerdere hoofdstukken
-% te verspreiden!
-
 \input{inleiding}
 \input{literatuurstudie}
 \input{methodologie}
 \input{proofofconcept}
 \input{resultaten}
-% Voeg hier je eigen hoofdstukken toe die de ``corpus'' van je bachelorproef
-% vormen. De structuur en titels hangen af van je eigen onderzoek. Je kan bv.
-% elke fase in je onderzoek in een apart hoofdstuk bespreken.
 
-%\input{...}
-%\input{...}
-%...
 \input{conclusie}
-
+'
 %%=============================================================================
 %% Bijlagen
 %%=============================================================================
