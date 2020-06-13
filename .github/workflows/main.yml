@@ -53,9 +53,4 @@ jobs:
         asset_path: ./voorstel/voorstel.pdf
         asset_name: ${{env.LAST_NAME}}_${{env.FIRST_NAME}}_${{steps.date.outputs.date_year}}_bachelorproef_voorstel.pdf 
         asset_content_type: application/pdf
-    - name: Upload bachelor thesis
-      id: upload-release-bachelor-thesis
-      uses: actions/upload-release-asset@v1.0.1
-      env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
- 
+    
