@@ -13,7 +13,7 @@ Vervolgens is er de sectie die de enquête bespreekt. De bespreking van de enqu�
 
 \section{Cisco Identity Services Engine omgeving}
 
-Voor de implementaties en testen van Cisco Identity Services Engine en zijn benodigde use cases is er een omgeving vereist. Deze omgeving is voorzien door een Belgische aanbieder van digitale televisie, breedband-internet, mobiele telefonie, enz. Die gekend als Telenet Group N.V. Implementaties en de testen van Cisco Identity Services Engine en met zijn benodigde use cases is uitgewerkt in een Telenet thuisnetwerk.
+Voor de implementaties en testen van Cisco Identity Services Engine en zijn benodigde use cases is er een omgeving vereist. Deze omgeving is voorzien door een Belgische aanbieder van digitale televisie, breedband-internet, mobiele telefonie, gekend als Telenet Group N.V. Implementaties en de testen van Cisco Identity Services Engine en met zijn benodigde use cases is uitgewerkt in een Telenet thuisnetwerk.
 \newline
 Zoals elk thuisnetwerk dat voorzien is door een Belgische internet aanbieder bevat het thuisnetwerk een aantal Telenet Access Points en een Telenet modem. De kabelverbinding die data verzend vanuit de Telenet centrale naar de Telenet modem is een coaxkabel. Het is dankzij de coaxkabel dat het thuisnetwerk verbonden is met het Wide Area Network, ook gekend als WAN.
 \newline
@@ -21,12 +21,12 @@ Zoals elk thuisnetwerk dat voorzien is door een Belgische internet aanbieder bev
 Om de essentiële componenten van dit thuisnetwerk te beschermen tegen breuk, is de implementatie verder uitgewerkt in een afgezonderd netwerk. Dit wordt mogelijk gemaakt met behulp van een virtuele opensource router/firewall zoals Pfsense. Dit virtuele routertje dient als gateway voor de verschillende vlan’s waarbij het thuisnetwerk gebruikt zal worden als ‘uplink’ naar het internet. 
 
 
+
 \subsection{Server VMware ESXi}
 Het afgezonderd netwerkje bestaat uit een rack server waarop een viertal virtuele machines draaien. Deze virtuele machines zijn: Cisco Identity Service Engine, het virtuele routerje (Pfsense) en twee  Windows Server 2019 datacenters machines. Dit wordt eenvoudig weergegeven in figuur \ref{fig:vms} die de virutele machines weergeeft. De creatie van deze virtuele machines is mogelijk gemaakt door VMware ESXi. VWware ESXi is een type-1 hypervisor van enterprise-klasse, ontwikkeld door VMware voor het inzetten en bedienen van virtuele machines. 
 \newline
 \newline
 De ESXi server is geconfigureerd door het gebruik van een ‘bootable usb’. Deze bootable usb bevatte al nodige software om de server te voorzien met VMware ESXi. Vervolgens werd de server geconfigureerd met een aantal belangrijke settings, zoals het instellen van een IP-adres, subnet mask, raid controller, enz. Waarbij zijn volgende settings voorzien op deze ESXi server: 
-
 
 \begin{itemize}
 	\item IP adres: 192.168.0.183
@@ -48,7 +48,6 @@ Door de configuratie van deze IP instellingen, is de VMware ESXi server toegangl
 \newline
 Dit is de veiligste en snelste methode maar ook het duurste. Het is een dure methode omdat er gebruik wordt gemaakt van RAID 1. Er is dus voor iedere 1TB aan opslagruimte ook 1TB aan mirror ruimte nodig, in combinatie met RAID 0 waardoor er veel fysieke harde schijven nodig zijn. In figuur \ref{fig:Raid10} wordt een voorbeeld van een RAID 10 schema weergegeven.
 
-
 \begin{figure}[H]
 	\centering
 	\includegraphics[height=0.25\textheight]{Raid10.png}
@@ -57,6 +56,7 @@ Dit is de veiligste en snelste methode maar ook het duurste. Het is een dure met
 \end{figure}
 
 Vervolgens zijn er in de VMware ESXi server opstelling drie van de vier fysieke ethernet adapters gebruikt. Deze adapters zijn op hun beurt verbonden met een virtuele switch. Elke fysieke adapters heeft een andere functie die weergegeven zijn in de onderstaande lijst. 
+
 
 \begin{itemize}
 	\item vmnic0,is de fysieke adapter die verbonden is met de virtuele switch, genaamd 'VSwitch0'.
@@ -109,6 +109,7 @@ De VMware ESXi server is van het merk International Business Machines Corporatio
 \newline
 Het model van de VMware ESXi server is ‘System x3350 M3’ dat gekend staat binnen Axians als ‘de oude shr-esx-04 server’. De IBM ‘System x3350 M3’ bevat volgende specificaties:
 
+
 \begin{itemize}
 	\item Vormfactor: 1U Rack
 	\item Processor:
@@ -141,7 +142,7 @@ Het model van de VMware ESXi server is ‘System x3350 M3’ dat gekend staat bi
 \end{figure}
 
 \subsection{Cisco switch}
-Naast de VMware ESXi server, bestaat de Cisco Identity Services Engine omgeving ook uit een Cisco switch. Dankzij een aantal configuraties op de Cisco switch kan de Cisco Identity Services Engine virtuele machine communiceren met de fysieke switch. Deze noodzakelijke configuraties speelden een belangrijke rol in de configuratie van de 'Port-based network access control' use case. 
+Naast de VMware ESXi server, bestaat de Cisco Identity Services Engine omgeving ook uit een Cisco switch. Op figuur \ref{fig:switch} ziet men een foto van de Cisco switch. Dankzij een aantal configuraties op de Cisco switch kan de Cisco Identity Services Engine virtuele machine communiceren met de fysieke switch. Deze noodzakelijke configuraties speelden een belangrijke rol in de configuratie van de 'Port-based network access control' use case. 
 \newline
 \newline
 Door een aantal basis configuraties op deze switch uit te voeren, wordt communicatie tussen het afgezonderd netwerk en de eind apparaten die zich achter de Cisco switch bevinden ook mogelijk. Deze informatie is terug te vinden in de sectie \ref{sec:config}.
@@ -149,7 +150,7 @@ Door een aantal basis configuraties op deze switch uit te voeren, wordt communic
 
 \subsubsection{Configuratie}
 \label{sec:config}
-Als eerst zijn een aantal commando's uitgevoerd die het netwerk apparaat beveiligen met een secret, line passwords en password encryption om inbreuk tegen te gaan. Vervolgens werd Gigabit Ethernet 0/1 geconfigureerd met de gepaste trunk settings om de gobale communicatie mogelijk te maken. Een trunk configuratie maakt data overdracht van de verschillende vlan's mogelijk. Volgende twee trunk commando's zijn hiervoor uitvoerd: 
+Als eerst zijn een aantal commando's uitgevoerd die het netwerk apparaat beveiligen met een secret, line passwords en password encryption om inbreuk tegen te gaan. Vervolgens werd Gigabit Ethernet 0/1 geconfigureerd met de gepaste trunk settings om de gobale communicatie mogelijk te maken. Een trunk configuratie maakt data overdracht van de verschillende vlan's mogelijk. Volgende twee trunk commando's zijn hiervoor uitvoerd:  
 
 \begin{itemize}
 	\item switchport mode trunk
@@ -217,6 +218,12 @@ De Cisco switch behoord tot de ‘Catalyst 2960-CX’ series die nu gekend staat
     \end{itemize}
 \end{itemize}
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{ciscoswitch.png}
+	\caption{Foto van de Cisco switch}
+	\label{fig:switch}
+\end{figure}
 
 \subsection{Virtuele machines}
 \subsubsection{Cisco Identity Services Engine}
@@ -225,7 +232,7 @@ De eerste virtuele machine waarop dieper wordt op ingegaan is Cisco Identity Ser
 \newline
 Alvorens men dieper ingaat op de use cases werd Cisco Identity Services Engine toegevoegd aan het Active Directory Domain. Figuren \ref{fig:AD_Cisco1} en \ref{fig:AD_Cisco2} tonen aan dat de virtuele machine van Cisco Identity Services Engine probleemloos toegevoegd is aan het domein 'Bachelorproef.com'. Dit toont aan dat Cisco Identity Services Engine eenvoudig geïntegreerd kan worden met een domein waarbij extra policy rules  in de toekomst kunnen ingevoerd worden. Dit onderzoek focust zich op de bescherming van de beschikbare interfaces op de Cisco switch. Dit door een extra authenticatie methode te voorzien en dus niet door een integratie van 'Port-based network access control' met het gebruik van Active Directory Domain users.
 
-De installatie van Cisco Identity Services Engine werd mogelijk gemaakt door \cite{CiscoISE_InstallationGuide}.
+De installatie van Cisco Identity Services Engine werd mogelijk door \cite{CiscoISE_InstallationGuide}.
 
 \begin{figure}[H]
 	\centering
@@ -245,7 +252,8 @@ De installatie van Cisco Identity Services Engine werd mogelijk gemaakt door \ci
 	Eerder werd vernoemd in sectie \ref{sec:config} dat er implementatie van 'Port-based network access control' configuraties op de Cisco switch verplicht zijn. Op dit onderdeel van de sectie ligt de focus op de configuratie van de 'Port-based network access control' use case in de Cisco Identity Services Engine webbrowser. 
 	\newline
 	\newline
- 	De Configuratie wordt gestart met de creatie van een aantal Cisco Identity Services Engine users in het 'Identity Management' tablad. In figuur \ref{fig:users} ziet men twee aangemaakte users waarbij user 'TestV2' zich in de groep 'Employees' bevindt en user 'Test' niet. Dit zal zich uiten wanneer een gebruiker zich aanmeldt met user 'Test'. Hierbij zal hij geen toegang krijgen tot het netwerk aan de hand van een policy rule.
+	De Configuratie wordt gestart met de creatie van een aantal Cisco Identity Services Engine users in het 'Identity Management' tablad. In figuur \ref{fig:users} ziet men twee aangemaakte users waarbij user 'TestV2' zich in de groep 'Employees' bevindt en user 'Test' niet. Dit zal zich uiten wanneer een gebruiker zich aanmeldt met user 'Test'. Hierbij zal hij geen toegang krijgen tot het netwerk aan de hand van een policy rule.
+
 	
  	\begin{figure}[H]
  		\centering
@@ -263,7 +271,7 @@ De installatie van Cisco Identity Services Engine werd mogelijk gemaakt door \ci
  		\label{fig:ISESwitch}%
  		\end{figure}
  	
- 	Ten slotte is een policy rule ingesteld waarbij gecontroleerd wordt of de gegevens overeenkomen met de instellingen van de policy rule. In dit geval laat de policy rule netwerk trafiek toe als de gebruiker de juiste identificatie gegevens ingeeft maar anderzijds moet de gebruiker ook tot de groep 'Employees' toegewezen zijn. Op figuur \ref{label} is policy role weergegeven.
+ 	Ten slotte is een policy rule ingesteld waarbij gecontroleerd wordt of de gegevens overeenkomen met de instellingen van de policy rule. In dit geval laat de policy rule netwerk trafiek toe als de gebruiker de juiste identificatie gegevens ingeeft maar anderzijds moet de gebruiker ook tot de groep 'Employees' toegewezen zijn. Op figuur \ref{fig:ISESwitch} is policy role weergegeven.
  	
 	 	 \begin{figure}[H]
 		\centering
@@ -274,7 +282,7 @@ De installatie van Cisco Identity Services Engine werd mogelijk gemaakt door \ci
 
  \subsubitem{\textbf{Thread-centri- en Policy-based network access control }}
   \newline
-	%!!!TO DO!!! Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed euismod velit, sed hendrerit justo. Praesent a hendrerit diam, ut imperdiet enim. In placerat nisl et commodo laoreet. Nullam convallis semper nibh nec cursus. Pellentesque a urna iaculis, eleifend turpis sit amet, varius velit. Nulla vitae est euismod, feugiat sem quis, fringilla nibh. Quisque ornare orci nisl, non pretium felis tempor id. Proin varius fermentum velit eu imperdiet. Praesent quis dolor at metus ornare dignissim sed finibus mauris. Maecenas pellentesque, ante ac vulputate dapibus, nisl nisi tristique libero, eu sollicitudin dolor est nec quam. Sed in lobortis sem. Phasellus nec diam eu magna lacinia tincidunt vitae in elit.
+	!!!TO DO!!! Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed euismod velit, sed hendrerit justo. Praesent a hendrerit diam, ut imperdiet enim. In placerat nisl et commodo laoreet. Nullam convallis semper nibh nec cursus. Pellentesque a urna iaculis, eleifend turpis sit amet, varius velit. Nulla vitae est euismod, feugiat sem quis, fringilla nibh. Quisque ornare orci nisl, non pretium felis tempor id. Proin varius fermentum velit eu imperdiet. Praesent quis dolor at metus ornare dignissim sed finibus mauris. Maecenas pellentesque, ante ac vulputate dapibus, nisl nisi tristique libero, eu sollicitudin dolor est nec quam. Sed in lobortis sem. Phasellus nec diam eu magna lacinia tincidunt vitae in elit.
  
 Verder werd systeem geïnstalleerd op een Red Hat Enterprise 7 distributie, waar volgende specificaties voor werd vrijgemaakt: 
 
@@ -299,7 +307,6 @@ Verder wordt het ‘Remote Desktop Protocol (RDP)’ in combinatie met het Inter
 \newline
 Om de Windows server 2019 datacenter te gebruiken werden volgende specificaties vrijgemaakt:
 
-
 \begin{itemize}
 	\item Geheugen: 16 GB Random Access Memory
 	\item Opslag: 126 GB
@@ -307,7 +314,7 @@ Om de Windows server 2019 datacenter te gebruiken werden volgende specificaties 
 	\item Netwerk adapter: Cisco\textunderscore netwerk
 \end{itemize}
 
-Als laatstse werd de installatie van Windows Server 2019 datacenter mogelijk gemaakt door \cite{Win19_InstallationGuide}. 
+Als laatstse werd de installatie van Windows Server 2019 datacenter mogelijk door \cite{Win19_InstallationGuide}. 
 
 \subsubsection{Pfsense}
 De Pfsense virtuele machine verwijst naar de virtuele router waarbij één interface van de Pfsense gebruikt wordt als gateway voor alle vlan’s en van alle componenten die zich achter de Cisco switch bevinden. Vervolgens wordt de WAN interface van de Pfsense gebruikt om de data van en naar de Local Area Network interface te sturen. Hierdoor is er communicatie vanuit het thuisnetwerk met het afgezonderd netwerk mogelijk.
@@ -339,6 +346,7 @@ Een jumphost is een tussenliggende host machine waarbij connectie naar een exter
 \newline
 Dit werd in de Cisco Identity Services Engine omgeving ook gebruikt waarbij een eind apparaat in het thuisnetwerk verbinding maakt met de Jumphost via Remote Desktop Protocol om zo eind apparaten in het afgezonderd netwerk te contacteren. Hierbij zijn volgende instellingen gebruikt:  
  
+ 
 \begin{itemize}
 	\item Geheugen: 16 GB Random Access Memory
 	\item Opslag: 126 GB
@@ -347,7 +355,7 @@ Dit werd in de Cisco Identity Services Engine omgeving ook gebruikt waarbij een 
 	\item Netwerk adapter 2: Sub\textunderscore netwerk
 \end{itemize}
 
-De installatie van de Jumphost werd mogelijk gemaakt door \cite{Win19_InstallationGuide}. 
+De installatie van de Jumphost werd mogelijk door \cite{Win19_InstallationGuide}. 
 
 \subsection{Begrippen}
 \subsubitem{\textbf{Telenet Access Point}} is een draadloze server die gegevens verzendt via radio golven in middel van een antenne. Deze gegevens worden ontvangen via het bedrage UTP netwerk waarbij deze “server” is op aan gesloten.
@@ -369,4 +377,5 @@ Dit formulier of enquête werd mogelijk gemaakt door Microsoft en Hogeschool Gen
 \newline
 \newline
 Een overzicht van de vragen die gesteld werden tijdens de enquête is terug te vinden in \ref{ch:Resultaten_enquête}. Bij elke vraag is steeds een klein woordje uitleg gegeven. Idem zoals de mogelijke antwoorden en eventuele doorverwijzingen naar andere vragen.
+
 
