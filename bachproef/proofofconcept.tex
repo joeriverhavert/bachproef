@@ -8,23 +8,25 @@
 Het doel van dit hoofdstuk is om een idee te creëren van de omgeving waarin Cisco Identity Services Engine is geïmplementeerd. Hierbij is een uitgebreide uitleg over de elementen die aanwezig zijn binnen de omgeving van Cisco terug te vinden in dit hoofdstuk. Ieder hardware apparaat is zorgvuldig beschreven, onder andere is er informatie te vinden over de specificatie, de configuraties en de instellingen van de hardware componenten. Daarnaast zijn ook de implementaties van de virtuele machines verder toegelicht.
 \newline
 \newline
-Samen met deze informatie zijn belangrijke schema’s weer verwerkt in dit hoofdstuk, die een visueel beeld geven over dit afgezonderd netwerk. 
-Vervolgens is er de sectie die de enquête bespreekt. De enquête bespreking bevat voornamelijk informatie die terug te vinden in de sectie \ref{sec:enquête}. 
+Samen met deze informatie zijn belangrijke schema’s verwerkt in dit hoofdstuk, die een visueel beeld geven over dit afgezonderd netwerk. 
+Vervolgens is er de sectie die de enquête bespreekt. De bespreking van de enquête bevat voornamelijk informatie die terug te vinden is in de sectie \ref{sec:enquête}. 
 
 \section{Cisco Identity Services Engine omgeving}
 
-Voor de implementaties en testen van Cisco Identity Services Engine en zijn benodigde use cases is er een omgeving vereist. Deze omgeving is voorzien door een Belgische aanbieder van digitale televisie, breedband-internet, mobiele telefonie, enz. Deze Belgische aanbieder staat gekend als Telenet Group N.V. Implementaties en de testen van Cisco Identity Services Engine en met zijn benodigde use cases is uitgewerkt in een Telenet thuisnetwerk.
+Voor de implementaties en testen van Cisco Identity Services Engine en zijn benodigde use cases is er een omgeving vereist. Deze omgeving is voorzien door een Belgische aanbieder van digitale televisie, breedband-internet, mobiele telefonie, enz. Die gekend als Telenet Group N.V. Implementaties en de testen van Cisco Identity Services Engine en met zijn benodigde use cases is uitgewerkt in een Telenet thuisnetwerk.
 \newline
-Zoals elk thuisnetwerk dat voorzien is door een Belgische internet aanbieder bevat het thuisnetwerk een aantal Telenet Access Points en een Telenet modem. De kabelverbinding die data verzend vanuit de Telenet centrale naar de Telenet modem is een coaxkabel. Het is dankzij de coaxkabel dat het thuisnetwerk verbonden is met het Wide Area Network (ook gekend als WAN).
+Zoals elk thuisnetwerk dat voorzien is door een Belgische internet aanbieder bevat het thuisnetwerk een aantal Telenet Access Points en een Telenet modem. De kabelverbinding die data verzend vanuit de Telenet centrale naar de Telenet modem is een coaxkabel. Het is dankzij de coaxkabel dat het thuisnetwerk verbonden is met het Wide Area Network, ook gekend als WAN.
 \newline
 \newline
-Om de essentiële componenten van dit thuisnetwerk te beschermen tegen breuk, is de implementatie verder uitgewerkt in een afgezonderd netwerk. Dit wordt mogelijk gemaakt met behulp van een virtuele opensource router/firewall zoals Pfsense. Dit virtuele routerje dient als gateway voor de verschillende vlan’s waarbij het thuisnetwerk gebruikt zal worden als ‘uplink’ naar het internet. 
+Om de essentiële componenten van dit thuisnetwerk te beschermen tegen breuk, is de implementatie verder uitgewerkt in een afgezonderd netwerk. Dit wordt mogelijk gemaakt met behulp van een virtuele opensource router/firewall zoals Pfsense. Dit virtuele routertje dient als gateway voor de verschillende vlan’s waarbij het thuisnetwerk gebruikt zal worden als ‘uplink’ naar het internet. 
+
 
 \subsection{Server VMware ESXi}
-Het afgezonderd netwerkje bestaat uit een rack server waarop een viertal virtuele machines draaien. Deze virtuele machine zijn: Cisco Identity Service Engine, het virtuele routerje, genaamd Pfsense en twee  Windows Server 2019 datacenters machines. Dit wordt eenvoudig weergegeven in figuur \ref{fig:vms} die de virutele machines weergeeft. De creatie van deze virtuele machines is mogelijk gemaakt door VMware ESXi. VWware ESXi is een type-1 hypervisor van enterprise-klasse, ontwikkeld door VMware voor het inzetten en bedienen van virtuele machines. 
+Het afgezonderd netwerkje bestaat uit een rack server waarop een viertal virtuele machines draaien. Deze virtuele machines zijn: Cisco Identity Service Engine, het virtuele routerje (Pfsense) en twee  Windows Server 2019 datacenters machines. Dit wordt eenvoudig weergegeven in figuur \ref{fig:vms} die de virutele machines weergeeft. De creatie van deze virtuele machines is mogelijk gemaakt door VMware ESXi. VWware ESXi is een type-1 hypervisor van enterprise-klasse, ontwikkeld door VMware voor het inzetten en bedienen van virtuele machines. 
 \newline
 \newline
-De ESXi server is geconfigureerd door het gebruik van een ‘bootable usb’. Deze bootable usb bevatte al nodige software om de server te voorzien met VMware ESXi. Vervolgens werd de server geconfigureerd met een aantal belangrijke settings, zoals het instellen van een IP adres, subnet mask, raid controller, enz. Waarbij zijn volgende settings voorzien op deze ESXi server: 
+De ESXi server is geconfigureerd door het gebruik van een ‘bootable usb’. Deze bootable usb bevatte al nodige software om de server te voorzien met VMware ESXi. Vervolgens werd de server geconfigureerd met een aantal belangrijke settings, zoals het instellen van een IP-adres, subnet mask, raid controller, enz. Waarbij zijn volgende settings voorzien op deze ESXi server: 
+
 
 \begin{itemize}
 	\item IP adres: 192.168.0.183
@@ -44,7 +46,8 @@ De ESXi server is geconfigureerd door het gebruik van een ‘bootable usb’. De
 Door de configuratie van deze IP instellingen, is de VMware ESXi server toeganglijk via de webbrowser. Virtuele machines kunnen via de webbrowser beheerd, verwijderd en gecreëerd worden. Daarnaast werd de hard disk drive ingesteld met een RAID controller. RAID, een afkoring voor Redundant array of independent disks is een dataopslagtechnologie waarbij meerdere harde schijven gecombineerd worden tot één of meer logische virtuele opslageenheden. Dit heeft als doel om de veiligheid, snelheid en de capaciteit te kunnen vergroten. Hierbij is op de VMware ESXi RAID 10 geconfigueerd. RAID 10 is een hybride combinatie tussen RAID 1 en RAID 0. Waarbij men de snelheid van striping met de veiligheid van mirroring combineert. 
 \newline
 \newline
-Dit is de veiligste en snelste methode maar ook de duurste. Het is een dure methode omdat er gebruik wordt gemaakt van RAID 1, dus voor iedere 1TB aan opslagruimte is er ook 1TB aan mirror ruimte nodig, in combinatie met RAID 0 waardoor er veel fysieke harde schijven nodig zijn. In figuur \ref{fig:Raid10} wordt een voorbeeld van een RAID 10 schema weergegeven.
+Dit is de veiligste en snelste methode maar ook het duurste. Het is een dure methode omdat er gebruik wordt gemaakt van RAID 1. Er is dus voor iedere 1TB aan opslagruimte ook 1TB aan mirror ruimte nodig, in combinatie met RAID 0 waardoor er veel fysieke harde schijven nodig zijn. In figuur \ref{fig:Raid10} wordt een voorbeeld van een RAID 10 schema weergegeven.
+
 
 \begin{figure}[H]
 	\centering
@@ -53,7 +56,7 @@ Dit is de veiligste en snelste methode maar ook de duurste. Het is een dure meth
 	\label{fig:Raid10}
 \end{figure}
 
-Vervolgens zijn er in de VMware ESXi server opstelling drie van de vier fysieke ethernet adapters gebruikt. Deze adapters zijn op hun beurt verbonden met een virtuele switch. Elk van de fysieke adapters heeft een andere functie die weergegeven zijn in de onderstaande lijst. 
+Vervolgens zijn er in de VMware ESXi server opstelling drie van de vier fysieke ethernet adapters gebruikt. Deze adapters zijn op hun beurt verbonden met een virtuele switch. Elke fysieke adapters heeft een andere functie die weergegeven zijn in de onderstaande lijst. 
 
 \begin{itemize}
 	\item vmnic0,is de fysieke adapter die verbonden is met de virtuele switch, genaamd 'VSwitch0'.
@@ -68,7 +71,8 @@ Vervolgens zijn er in de VMware ESXi server opstelling drie van de vier fysieke 
 De 'VSwitch0' is een virtuele switch die voorzien is om de VMware ESXi server te contacteren via de webbrowser. Op figuur \ref{fig:Vswitch0} ziet men dat de 'VSwitch0' is ingesteld met vlan id 0, dat geen vlan identificatie voorziet. 
 \newline
 \newline
-Data passeert deze interface wanneer gebruikers surfen naar "https://192.168.0.183". Vervolgens passeert de data langs de fysieke poort vmnic0 die data doorgeeft aan de VSwitch0. Wanneer data terecht komt op de VSwitch0, stuurt hij op zijn beurt de data door naar de VMKernel poort.
+TCP/IP pakketen passeren deze interface wanneer gebruikers surfen naar "https://192.168.0.183". Vervolgens passeert de TCP/IP pakketen langs vmnic0 die de informatie doorgeeft aan de VSwitch0. Wanneer de informatie terecht komt op de VSwitch0, stuurt hij op zijn beurt dit door naar de VMKernel poort.
+
 
 \begin{figure}[H]
 	\centering
@@ -79,7 +83,7 @@ Data passeert deze interface wanneer gebruikers surfen naar "https://192.168.0.1
 
 \subsubitem{\bf Sub\textunderscore switch}
 \newline
-Op figuur \ref{fig:subswitch} ziet men dat de 'Sub\textunderscore switch' een virtuele switch is die gebruikt wordt voor WAN interface van de Pfsense. De Wide Area Network interface voorziet data overdracht van het thuisnetwerk naar het afgezonderd LAN netwerk. Hierdoor is connectie met het afgezonderd netwerk mogelijk via deze interface. Bovendien wordt deze virtuele switch ook gebruikt door de jumphost om remote desktop protocol connecties te maken met de virtuele machines binnen het afgezonderd LAN netwerk. 
+Op figuur \ref{fig:subswitch} ziet men dat de 'Sub\textunderscore switch' een virtuele switch is die gebruikt wordt voor de WAN interface van de Pfsense. De Wide Area Network interface voorziet data overdracht van het thuisnetwerk naar het afgezonderd LAN netwerk. Hierdoor is connectie met het afgezonderd netwerk mogelijk via deze interface. Bovendien wordt deze virtuele switch ook gebruikt door de jumphost om remote desktop protocol connecties te maken met de virtuele machines binnen het afgezonderd LAN netwerk. 
 
 \begin{figure}[H]
 	\centering
@@ -90,7 +94,7 @@ Op figuur \ref{fig:subswitch} ziet men dat de 'Sub\textunderscore switch' een vi
 \newpage
 \subsubitem{\bf Cisco\textunderscore switch}
 \newline
-Ten slot is er de 'Cisco\textunderscore switch' die gebruikt wordt om connectie te maken met alle apparaten achterliggend de fysieke Cisco switch. Wanneer eind apparaten met de Cisco switch verbinden, dan zal de data passeren via de 'Cisco\textunderscore switch'. Bovendien is op figuur \ref{fig:Ciscoswitch} te zien dat alle virtuele machines zich in deze omgeving bevinden. Dit zorgt er voor dat de Cisco\textunderscore switch ingesteld is met vlan id 10, waarbij enkel data vanuit vlan 10 wordt doorgestuurd naar de voorziene eind apparaten.
+Tot slot is er de 'Cisco\textunderscore switch' die gebruikt wordt om connectie te maken met alle apparaten, achterliggend de fysieke Cisco switch. Wanneer eind apparaten met de Cisco switch verbinden, zal de data passeren via de 'Cisco\textunderscore switch'. Op de figuur \ref{fig:Ciscoswitch} is ook te zien dat alle virtuele machines zich in deze omgeving bevinden. Dit zorgt ervoor dat de Cisco\textunderscore switch ingesteld is met vlan id 10, waarbij enkel data vanuit vlan 10 wordt doorgestuurd naar de voorziene eind apparaten.
 
 \begin{figure}[H]
 	\centering
@@ -140,7 +144,8 @@ Het model van de VMware ESXi server is ‘System x3350 M3’ dat gekend staat bi
 Naast de VMware ESXi server, bestaat de Cisco Identity Services Engine omgeving ook uit een Cisco switch. Dankzij een aantal configuraties op de Cisco switch kan de Cisco Identity Services Engine virtuele machine communiceren met de fysieke switch. Deze noodzakelijke configuraties speelden een belangrijke rol in de configuratie van de 'Port-based network access control' use case. 
 \newline
 \newline
-Door een aantal basis configuraties op deze switch uit te voeren wordt communicatie tussen het afgezonderd netwerk en de eind apparaten die zich achter de Cisco switch bevinden ook mogelijk. Deze informatie is terug te vinden in de sectie \ref{sec:config}.
+Door een aantal basis configuraties op deze switch uit te voeren, wordt communicatie tussen het afgezonderd netwerk en de eind apparaten die zich achter de Cisco switch bevinden ook mogelijk. Deze informatie is terug te vinden in de sectie \ref{sec:config}.
+
 
 \subsubsection{Configuratie}
 \label{sec:config}
@@ -159,6 +164,7 @@ Om de 'Port-based network access control' use case te implementeren, werd een ni
 \newline
 \newline
 Om de configuraties van de Cisco switch te beëindeigen, werd dot1x system-auth-control vastgelegd en werden alle poorten voorzien van de nodige 'Port-based access control' configuraties. Figuur \ref{fig:RunningConfig} toont de running config van de Switch Cisco, daarnaast zijn alle nodige commando's in onderstaande lijst ook weergegeven.
+
 \begin{itemize}
 	\item \#enable
 	\item \#config t
@@ -217,7 +223,7 @@ De Cisco switch behoord tot de ‘Catalyst 2960-CX’ series die nu gekend staat
 De eerste virtuele machine waarop dieper wordt op ingegaan is Cisco Identity Services Engine. Deze virtuele machine zal zich verdiepen in de use cases: 'Port-based network access control', 'Policy-based network access control' en 'Thread-centric network access control'. Daarvoor zijn een aantal configuraties uitgevoerd op de virtuele machine van Cisco Identity Services Engine om een antwoord te geven het onderzoek. Hieronder worden de configuraties opgesplitst per use cases, waarbij de use cases vaak in de praktijk worden gecombineerd. De resultaten van de Cisco Identity Services Engine configuraties vindt men terug in Hoofdstuk \ref{ch:Resultaten}.
 \newline
 \newline
-Alvorens men dieper ingaat op de use cases werd Cisco Identity Services Engine toegevoegd aan het Active Directory Domein. Figuren \ref{fig:AD_Cisco1} en \ref{fig:AD_Cisco2} tonen aan dat de virtuele machine van Cisco Identity Services Engine probleemloos toegevoegd is aan het domein 'Bachelorproef.com'. Dit toont aan dat Cisco Identity Services Engine eenvoudig geïntegreerd kan worden met een domein, waarbij in de toekomst extra policy rules kunnen ingevoerd worden. Dit onderzoek focust zich op de bescherming van de vrije interfaces op de Cisco switch door een extra authenticatie methode te voorzien en dus niet op integratie van 'Port-based network access control' het gebruik Active Directory Domein users.
+Alvorens men dieper ingaat op de use cases werd Cisco Identity Services Engine toegevoegd aan het Active Directory Domain. Figuren \ref{fig:AD_Cisco1} en \ref{fig:AD_Cisco2} tonen aan dat de virtuele machine van Cisco Identity Services Engine probleemloos toegevoegd is aan het domein 'Bachelorproef.com'. Dit toont aan dat Cisco Identity Services Engine eenvoudig geïntegreerd kan worden met een domein waarbij extra policy rules  in de toekomst kunnen ingevoerd worden. Dit onderzoek focust zich op de bescherming van de beschikbare interfaces op de Cisco switch. Dit door een extra authenticatie methode te voorzien en dus niet door een integratie van 'Port-based network access control' met het gebruik van Active Directory Domain users.
 
 De installatie van Cisco Identity Services Engine werd mogelijk gemaakt door \cite{CiscoISE_InstallationGuide}.
 
@@ -236,11 +242,11 @@ De installatie van Cisco Identity Services Engine werd mogelijk gemaakt door \ci
 \end{figure}
  \subsubitem{\textbf{Port- en Policy-based network access control }}
  \newline
- 	Eerder werd vernoemd in sectie \ref{sec:config} dat voor implementatie van 'Port-based network access control' configuraties op de Cisco switch verplicht zijn. Op dit onderdeel van de sectie ligt de focus op de configuratie van de 'Port-based network access control' use case in de Cisco Identity Services Engine webbrowser. 
- 	\newline
- 	\newline
- 	De Configuratie wordt gestart met de creatie van een aantal Cisco Identity Services Engine users in het 'Identity Management' tablad. In figuur \ref{fig:users} ziet men twee aangemaakte users waarbij user 'TestV2' zich in de groep 'Employees' bevindt en user 'Test' niet. Dit zal zich uiten wanneer een gebruiker zich aanmeldt met user 'Test' dan zal hij geen toegang krijgen tot het netwerk aan de hand van een policy rule.
- 	
+	Eerder werd vernoemd in sectie \ref{sec:config} dat er implementatie van 'Port-based network access control' configuraties op de Cisco switch verplicht zijn. Op dit onderdeel van de sectie ligt de focus op de configuratie van de 'Port-based network access control' use case in de Cisco Identity Services Engine webbrowser. 
+	\newline
+	\newline
+ 	De Configuratie wordt gestart met de creatie van een aantal Cisco Identity Services Engine users in het 'Identity Management' tablad. In figuur \ref{fig:users} ziet men twee aangemaakte users waarbij user 'TestV2' zich in de groep 'Employees' bevindt en user 'Test' niet. Dit zal zich uiten wanneer een gebruiker zich aanmeldt met user 'Test'. Hierbij zal hij geen toegang krijgen tot het netwerk aan de hand van een policy rule.
+	
  	\begin{figure}[H]
  		\centering
  		\includegraphics[width=0.9\textwidth]{Port_users.png}
@@ -257,7 +263,7 @@ De installatie van Cisco Identity Services Engine werd mogelijk gemaakt door \ci
  		\label{fig:ISESwitch}%
  		\end{figure}
  	
- 	Ten slotte is een policy rule ingesteld waarbij gecontroleerd wordt of de gegevens overeenkomen met de instellingen van de policy rule. In dit geval laat de policy rule netwerk trafiek tot als de gebruiker de juiste identificatie gegevens ingeeft maar anderzijds ook wanneer de gebruiker zich in de groep 'Employees' bevindt. Op figuur \ref{label} is policy role weergegeven.
+ 	Ten slotte is een policy rule ingesteld waarbij gecontroleerd wordt of de gegevens overeenkomen met de instellingen van de policy rule. In dit geval laat de policy rule netwerk trafiek toe als de gebruiker de juiste identificatie gegevens ingeeft maar anderzijds moet de gebruiker ook tot de groep 'Employees' toegewezen zijn. Op figuur \ref{label} is policy role weergegeven.
  	
 	 	 \begin{figure}[H]
 		\centering
@@ -268,9 +274,9 @@ De installatie van Cisco Identity Services Engine werd mogelijk gemaakt door \ci
 
  \subsubitem{\textbf{Thread-centri- en Policy-based network access control }}
   \newline
-	!!!TO DO!!! Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed euismod velit, sed hendrerit justo. Praesent a hendrerit diam, ut imperdiet enim. In placerat nisl et commodo laoreet. Nullam convallis semper nibh nec cursus. Pellentesque a urna iaculis, eleifend turpis sit amet, varius velit. Nulla vitae est euismod, feugiat sem quis, fringilla nibh. Quisque ornare orci nisl, non pretium felis tempor id. Proin varius fermentum velit eu imperdiet. Praesent quis dolor at metus ornare dignissim sed finibus mauris. Maecenas pellentesque, ante ac vulputate dapibus, nisl nisi tristique libero, eu sollicitudin dolor est nec quam. Sed in lobortis sem. Phasellus nec diam eu magna lacinia tincidunt vitae in elit.
+	%!!!TO DO!!! Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed euismod velit, sed hendrerit justo. Praesent a hendrerit diam, ut imperdiet enim. In placerat nisl et commodo laoreet. Nullam convallis semper nibh nec cursus. Pellentesque a urna iaculis, eleifend turpis sit amet, varius velit. Nulla vitae est euismod, feugiat sem quis, fringilla nibh. Quisque ornare orci nisl, non pretium felis tempor id. Proin varius fermentum velit eu imperdiet. Praesent quis dolor at metus ornare dignissim sed finibus mauris. Maecenas pellentesque, ante ac vulputate dapibus, nisl nisi tristique libero, eu sollicitudin dolor est nec quam. Sed in lobortis sem. Phasellus nec diam eu magna lacinia tincidunt vitae in elit.
  
-Verder werd systeem geïnstalleerd op een Red Hat Enterprise 7 distributie, waar vogende specificaties voor werd vrijgemaakt: 
+Verder werd systeem geïnstalleerd op een Red Hat Enterprise 7 distributie, waar volgende specificaties voor werd vrijgemaakt: 
 
 \begin{itemize}
 	\item Geheugen: 128 GB Random Access Memory
@@ -280,18 +286,19 @@ Verder werd systeem geïnstalleerd op een Red Hat Enterprise 7 distributie, waar
 \end{itemize}
 
 \subsubsection{Windows server 2019 datacenter}
-Het gebruik van een Windows Server 2019 maakt de creatie van een Active Directory domein mogelijk. Een nieuwe forest werd hiervoor aangemaakt en de Windows Server 2019 werd meteeon ook gepromoveerd naar de domeincontroller binnen het 'bachelrorproef.com' netwerk.
+Het gebruik van een Windows Server 2019 maakt de creatie van een Active Directory domein mogelijk. Een nieuwe forest werd hiervoor aangemaakt en de Windows Server 2019 werd meteen ook gepromoveerd naar de domeincontroller binnen het 'bachelrorproef.com' netwerk.
 \newline
 \newline
-Via Cisco Identity Service Engine kan men subset van domeinen selecteren vanuit de vertrouwde domeinen voor authenticatie en autorisatie. Deze subset van domeinen worden authenticatiedomeinen genoemd. Het definiëren van deze authenticatiedomeinen verbetert de beveiliging door bepaalde domeinen te blokkeren, waardoor de authenticatie van de gebruikers op deze domeinen wordt beperkt.
+Via Cisco Identity Service Engine kan men subset van domeinen selecteren vanuit de vertrouwde domeinen voor authenticatie en autorisatie. Deze subset van domeinen worden authenticatiedomeinen genoemd. Het definiëren van deze authenticatiedomeinen verbetert de beveiliging voor bepaalde domeinen te blokkeren, waardoor de authenticatie van de gebruikers op deze domeinen wordt beperkt.
 \newline
 \newline
-Zoals voorheen vermeld is integratie met Windows Server Active Directory en Cisco Identity Services Engine reeds mogelijk. Hierdoor kunnen bedrijven met Cisco Identity Services opteren om werknemers te laten inloggen op het netwerk met de 'Domain Users. Vaak wordt deze methode geïntegreerd met het 'wireless' aanmelden op netwerk door gebruik van de Active Domain Directory gegevens. Helaas beschikte dit afgezonderde netwerk niet over een wireless controller die dit mogelijk maakt. Cisco Identity Services voorziet hiervoor vooraf gedefinieerde regels.
+Zoals voorheen vermeld, is integratie met Windows Server Active Directory en Cisco Identity Services Engine reeds mogelijk. Hierdoor kunnen bedrijven met Cisco Identity Services opteren om werknemers te laten inloggen op het netwerk met de 'Domain Users’. Vaak wordt deze methode geïntegreerd met het '802.1x wireless port-based network access control' van Cisco Identity Services Engine om aan te melden op netwerk met gebruik met de Active Domain Directory gegevens. Helaas beschikte dit afgezonderde netwerk niet over een wireless controller die dit mogelijk maakt. Cisco Identity Services voorziet hiervoor vooraf gedefinieerde regels.
 
 Verder wordt het ‘Remote Desktop Protocol (RDP)’ in combinatie met het Internet Protocol (IP) adres gebruikt om de Windows machines te bereiken.
 \newline
 \newline
 Om de Windows server 2019 datacenter te gebruiken werden volgende specificaties vrijgemaakt:
+
 
 \begin{itemize}
 	\item Geheugen: 16 GB Random Access Memory
@@ -303,13 +310,13 @@ Om de Windows server 2019 datacenter te gebruiken werden volgende specificaties 
 Als laatstse werd de installatie van Windows Server 2019 datacenter mogelijk gemaakt door \cite{Win19_InstallationGuide}. 
 
 \subsubsection{Pfsense}
-De Pfsense virtuele machine verwijst naar de virtuele router waarbij één interface van de Pfsense gebruikt wordt als gateway voor alle vlan’s en van alle componenten die zich achter de Cisco switch bevinden. Vervolgens wordt de WAN interface van de Pfsense gebruikt om de data van en naar de Local Area Network interface te sturen. Hierdoor is communicatie vanuit het thuisnetwerk met het afgezonderd netwerk mogelijk.
+De Pfsense virtuele machine verwijst naar de virtuele router waarbij één interface van de Pfsense gebruikt wordt als gateway voor alle vlan’s en van alle componenten die zich achter de Cisco switch bevinden. Vervolgens wordt de WAN interface van de Pfsense gebruikt om de data van en naar de Local Area Network interface te sturen. Hierdoor is er communicatie vanuit het thuisnetwerk met het afgezonderd netwerk mogelijk.
 \newline
 \newline
-De pfsense is enkel te contacteren binnen het afgezonderd netwerk door het ‘Hypertext Transfer Protocol (HTTP)’ te gebruiken. Met andere woorden kunnen enkel machines in het netwerk '192.168.17.0/24' de Pfsense interface bereiken door te surfen naar het ip adres: '192.168.17.1'. Op figuur \ref{fig:Pfsense} is te zien dat de home interface van de Pfsense te bereiken is via 'http://192.168.17.1/'.
+De pfsense is enkel te contacteren binnen het afgezonderd netwerk door ‘Hypertext Transfer Protocol (HTTP)’ te gebruiken. Met andere woorden kunnen enkel machines in het netwerk '192.168.17.0/24' de Pfsense interface bereiken door te surfen naar het ip-adres: '192.168.17.1'. Op figuur \ref{fig:Pfsense} is te zien dat de home interface van de Pfsense te bereiken is via 'http://192.168.17.1/'.
 \newline
 \newline
-Ten slotte werd dit systeem geïnstalleerd op een Free Berkeley Software Distribution, waar volgende specificaties zijn voor vrijgemaakt: 
+Ten slotte werd dit systeem geïnstalleerd op een Free Berkeley Software Distribution, waar volgende specificaties zijn voor vrijgemaakt:  
 
 \begin{itemize}
 	\item Geheugen: 4 GB Random Access Memory
@@ -331,7 +338,7 @@ Een jumphost is een tussenliggende host machine waarbij connectie naar een exter
 \newline
 \newline
 Dit werd in de Cisco Identity Services Engine omgeving ook gebruikt waarbij een eind apparaat in het thuisnetwerk verbinding maakt met de Jumphost via Remote Desktop Protocol om zo eind apparaten in het afgezonderd netwerk te contacteren. Hierbij zijn volgende instellingen gebruikt:  
-
+ 
 \begin{itemize}
 	\item Geheugen: 16 GB Random Access Memory
 	\item Opslag: 126 GB
@@ -340,7 +347,7 @@ Dit werd in de Cisco Identity Services Engine omgeving ook gebruikt waarbij een 
 	\item Netwerk adapter 2: Sub\textunderscore netwerk
 \end{itemize}
 
-De installatie van Pfsense werd mogelijk gemaakt door \cite{Pfsense_InstallationGuide}.
+De installatie van de Jumphost werd mogelijk gemaakt door \cite{Win19_InstallationGuide}. 
 
 \subsection{Begrippen}
 \subsubitem{\textbf{Telenet Access Point}} is een draadloze server die gegevens verzendt via radio golven in middel van een antenne. Deze gegevens worden ontvangen via het bedrage UTP netwerk waarbij deze “server” is op aan gesloten.

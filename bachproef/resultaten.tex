@@ -1,17 +1,16 @@
 
  \chapter{\IfLanguageName{dutch}{Resultaten}{Resultaten}}
 \label{ch:Resultaten}
-In dit hoofdstuk zullen de resultaten van de testen en de enquête verwerkt worden om zo tot een antwoord te komen op dit onderzoek. Hierbij zijn de resultaten van de Cisco Identity Services Engine omgeving opgedeeld in 'Port-based en Policy-based network access control' en 'Tread-Centric en Policy-based network access control'. Vervolgens zijn de enquête resultaten verwerkt met een aantal grafieken waarbij dit terug te vinden is in Bijlage \ref{ch:Resultaten_enquête}. Meer informatie over de resultaten van de enquête vindt men in sectie \ref{sec:enqueteISe}.
+In dit hoofdstuk zullen de resultaten van de testen en de enquête verwerkt worden om tot een antwoord te komen op dit onderzoek. Hierbij zijn de resultaten van de Cisco Identity Services Engine omgeving opgedeeld in 'Port-based en Policy-based network access control' en 'Thread-Centric en Policy-based network access control'. Vervolgens zijn de enquête resultaten verwerkt met een aantal grafieken waarbij de resultaten terug te vinden zijn in Bijlage \ref{ch:Resultaten_enquête}. Meer informatie over de resultaten van de enquête vindt men in sectie \ref{sec:enqueteISe}.
 
 \section{Cisco Identity Services Engine omgeving}
-Zoals men ziet wordt Policy-based network access control steeds gecombineerd met Port-based en Thead-Centric network access control. Dit heeft als rede dat voor zowel Port-based, als voor Thread-Centric network access control, policy rules zijn toegepast.
-
+Zoals men ziet wordt Policy-based network access control steeds gecombineerd met Port-based en Thead-Centric network access control. Dit heeft als rede dat voor zowel Port-based, als voor Thread-Centric network access control, policy rules zijn toegepast. In elk van deze subsecties worden de resultaten van voor de implemenatie van de Cisco Identity Services Engine use cases en eens na de implemenatie van deze use case toegelicht. Op die manier kan in hoofdstuk \ref{ch:conclusie} een conlusie gemaakt worden die een duidelijk antwoord biedt op dit onderzoek. 
 \subsection{Port-based en Policy-based network access control}
-Wanneer de use cases 'Port-based en Policy-based network access control' niet worden toegepast, dan kunnen gebruikers zich aansluiten op het netwerk zonder enige beveiliging. Dit is natuurlijk enkel mogelijk wanneer alle interfaces op het netwerk apparaat ingesteld zijn met het correcte vlan id. Anderzijds is het duidelijk dat eind apparaten zich eenvoudiger kunnen aansluiten op het netwerk zonder 'Port-based en Policy-based network access control'.
-Als men de resultaten van de implemenatie van 'Port-based en Policy-based network access control' er bij halen, dan ziet men een duidelijk verschil in beveiliging ten opzichte van een netwerk zonder de use cases. Dit verschil is duidelijk te merken wanneer een gebruiker zich probeert aan te melden op het netwerk via één van de interfaces op de fysieke Cisco switch. Het eind apparaat krijgt een toegewezen ip adres van de vorm 169.254.x.x dat geen enkel compartiment van het netwerk kan bereiken. 
+Wanneer de use cases 'Port-based en Policy-based network access control' niet worden toegepast, dan kunnen gebruikers zich aansluiten op het netwerk zonder enige beveiliging. Dit is natuurlijk enkel mogelijk wanneer alle interfaces op het netwerk apparaat ingesteld zijn met het correcte vlan id. Anderzijds is het duidelijk dat eind apparaten zich eenvoudiger kunnen aansluiten op het netwerk zonder de implementatie van 'Port-based en Policy-based network access control' use cases.
+Als men de resultaten van de implemenatie van 'Port-based en Policy-based network access control' er bij halen, dan ziet men een duidelijk verschil in beveiliging ten opzichte van een netwerk zonder de use cases. Dit verschil is duidelijk te merken wanneer een gebruiker zich probeert aan te melden op het netwerk via één van de interfaces op de fysieke Cisco switch. Het eind apparaat wijst zichzelf een ip adres toe van de vorm 169.254.x.x dat geen enkel compartiment van het netwerk kan bereiken. 
 \newline
 \newline
-Het is echter wanneer de 'Wired AutoConfig' services aanstaan, kan men zich aanmelden op het netwerk door volgende stappen uit te voeren: 
+Het is echter wanneer de 'Wired AutoConfig' services aanstaan, kan men zich aanmelden op het netwerk door de volgende stappen uit te voeren: 
 
 \begin{itemize}
 	\item Open het configuratiescherm, en ga naar 'netwerk en internet'.
@@ -20,21 +19,19 @@ Het is echter wanneer de 'Wired AutoConfig' services aanstaan, kan men zich aanm
 	\item Open het 'properties' tablad, door een rechtermuisklik op de correcte "Ehternet adapter".
 	\item Vervolgens verschijnt het tablad "Authenticatie".
 	\item Open "Extra instellingen".
-	\item Veranderd het de 'authentication modus' naar gebruikers authenticatie.
+	\item Veranderd de 'authentication modus' naar 'gebruikers authenticatie'.
 \end{itemize}
+
 Als de eind gebruikers de juiste gebruikersnaam en wachtwoord ingeeft, wordt de gebruiker met zijn apparaat aangesloten op het netwerk. Belangrijk om te weten is dat er een policy rule is ingesteld is dat alleen gebruikers van de groep 'Employees' toegang krijgen tot het netwerk. Het gebruik van de policy werd al eerder vernoemd in het hoofdstuk \ref{ch:Proof of concept}.
-\newline
-\newline
-Figuur \ref{fig:Test_gebruiker} toont aan dat wanneer men wenst in te loggen met de gebruikersnaam 'Test' geen toegang krijgt tot het netwerk. Gebruiker 'Test' bevindt zich niet in de groep 'Employees' en zal dus als gevolg geen toegang krijgen tot het netwerk. Door het gebruik van policy rules wordt dankzij de test aangetoond dat policy rules ook de vruchten kan plukken op beveiliging.
+Figuur \ref{fig:Test_gebruiker} toont aan dat wanneer men wenst in te loggen met de gebruikersnaam 'Test' geen toegang krijgt tot het netwerk. Gebruiker 'Test' bevindt zich niet in de groep 'Employees' en zal dus als gevolg geen toegang krijgen tot het netwerk. Dankzij het gebruik van policy rules wordt de proef aangetoond dat policy rules ook de vruchten kan plukken op beveiliging.
 
 \begin{figure}[H]
 	\centering
-	\subfloat{{\includegraphics[width=6.5cm]{Test_no_employee.png} }}%
+	\subfloat{{\includegraphics[width=5.5cm]{Test_no_employee.png} }}%
 	\qquad
-	\subfloat{{\includegraphics[width=6.5cm]{Test_no_successed.png} }}%
+	\subfloat{{\includegraphics[width=5.5cm]{Test_no_successed.png} }}%
 	\newline
-	\qquad
-	\subfloat{{\includegraphics[width=14cm]{TestDenied.png} }}%
+	\subfloat{{\includegraphics[width=11.5cm]{TestDenied.png} }}%
 	\caption{Proef resultaat met een niet employee gebruiker}%
 	\label{fig:Test_gebruiker}%
 \end{figure}
@@ -48,12 +45,14 @@ Als men inlogt met een gebruiker die in de Cisco Identity Services Engine groep 
 	\subfloat{{\includegraphics[width=6cm]{TestV2_succeeded.png} }}%
 	\newline
 	\qquad
-	\subfloat{{\includegraphics[width=13cm]{TestV2_succeeded_ISE.png} }}%
+	\subfloat{{\includegraphics[width=12cm]{TestV2_succeeded_ISE.png} }}%
 	\caption{Proef resultaat met een employee gebruiker}%
 	\label{fig:Test_gebruiker}%
 \end{figure}
 
-Hierdoor kent Cisco Idendity Services Engine met use cases 'Port-based en Policy-based network access control' een positieve resultaat in een netwerk. In de sectie \ref{sec:trepo} worden de resultaten van Tread-Centric en Policy-based network access control besproken. Voor meer uitleg over de volledige conclusie kunt u terecht in Hoofdstuk \ref{ch:conclusie}.
+Men bekomt door het gebruik van Cisco Idendity Services Engine en use cases 'Port-based en Policy-based network access control' een positieve resultaat. Hieruit kan men uit de resultaten van de proef afleiden dat 'Port-based en Policy-based network access control' het bedrijfsnetwerk zeker en vast veiliger maken tegen criminelen die het netwerk willen binnentreden door de beschikbare interfaces. Werknemers zullen in het vervolg zich eerst moeten aanmelden met de Cisco Identity Services Engine gegevens alvorens men voor de eerste keer connectie wilt maken met het netwerk. Nadien blijven deze gegevens opgeslagen op het eind apparaat en kan men steeds probleemloos verbinden met het netwerk via de Ethernet kabel.
+
+In de sectie \ref{sec:trepo} worden de resultaten van Tread-Centric en Policy-based network access control besproken. Voor meer uitleg over de volledige conclusie kan men terecht in Hoofdstuk \ref{ch:conclusie}.
 
 
 \subsection{Tread-Centric en Policy-based network access control}
