@@ -49,6 +49,44 @@ Als men inlogt met een gebruiker die in de Cisco Identity Services Engine groep 
 	\label{fig:Test_gebruiker}%
 \end{figure}
 
+Vervolgens werd bij de tweede proef een policy rule geïmplementeerd die de toegang naar het netwerk vanuit de Cisco switch blokkeert op specifieke weekdagen.  De proef zou moeten aantonen wanneer gebruiker 'X' zich op woensdag aansluit op het netwerk dan zou gebruiker 'X' met zijn eindapparaat geen toegang krijgen.
+Op Figuur \ref{fig:Woensdag} is te zien dat gebruiker 'TestV4' met de 'Port-based network access control' use case zich probeert aan te sluiten op het netwerk. 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[height=0.20\textheight]{TestV4_Employee.png}
+	\caption{Grafiek resultaat vraag 2}
+	\label{fig:Woensdag}
+\end{figure}
+
+Het is al snel duidelijk dat Cisco Identity Services Engine toegang tot het netwerk blokkeert. Cisco Identity Services Engine registreert dat gebruiker 'TestV4' zich probeert aan te sluiten op het netwerk maar wordt vervolgens de toegang onmiddelijk ontnomen. Dit wordt aangetoond op figuur \ref{fig:failed} waarbij de toegang tot het netwerk voor gebruiker 'TestV4' geblokkeerd werd. 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[height=0.20\textheight]{UsersFailed_Suc.png}
+	\caption{Grafiek resultaat vraag 2}
+	\label{fig:failed}
+\end{figure}
+
+Om aan te tonen dat gebruiker 'TestV4' het netwerk werd ontnomen door de 'Disable\textunderscore at\textunderscore weekend' policy rule kan men het rapport terug vinden in figuur \ref{fig:failed2}. Op deze figuur is te zien dat 'Disable\textunderscore at\textunderscore weekend' het desbetreffende Authorization policy rule was die werd uitgevoerd dat resulteerde in geen toegang tot het netwerk. 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[height=0.20\textheight]{TestV4_failed.png}
+	\caption{Grafiek resultaat vraag 2}
+	\label{fig:failed2}
+\end{figure}
+
+Ten slotte toont figuur \ref{fig:ping} aan dat het eindapparaat na blokkade van het netwerk geen enkel component in het afgezonderd netwerk kan bereiken. Hiervoor werd het commando: 'Ping 192.168.17.1' uitgevoerd waarbij het eindapparaat de default gateway tracht te bereiken.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[height=0.20\textheight]{PingTestV4_failed.png}
+	\caption{Grafiek resultaat vraag 2}
+	\label{fig:ping}
+\end{figure}
+
+
 Men bekomt door het gebruik van Cisco Idendity Services Engine en use cases 'Port-based en Policy-based network access control' een positieve resultaat. Hieruit kan men uit de resultaten van de proef afleiden dat 'Port-based en Policy-based network access control' het bedrijfsnetwerk zeker en vast veiliger maakt tegen criminelen die het netwerk willen binnentreden. Dit komt door de beschikbare interfaces. Werknemers zullen in het vervolg zich eerst moeten aanmelden met de Cisco Identity Services Engine gegevens alvorens men voor de eerste keer connectie wilt maken met het netwerk. Nadien blijven deze gegevens opgeslagen op het eind apparat. Zo kan men steeds probleemloos verbinden met het netwerk via de Ethernet kabel.
 
 In de sectie \ref{sec:trepo} worden de resultaten van Tread-Centric en Policy-based network access control besproken. Voor meer uitleg over de volledige conclusie kan men terecht in Hoofdstuk \ref{ch:conclusie}.
@@ -113,8 +151,7 @@ Uit vragen 14 en 15 is gebleken dat Cisco Identity Services Engine een logische 
 Hierbij zijn de Antwoordenterug te vinden in bijlage \ref{tab:vraag13}. Verder werd er ook heel wat voordelen opgesomd door de vakspecalisten die weergegeven zijn in \ref{tab:vraag11}.
 \newline
 \newline
-18.2\% van de personen die de enquête invulden vinden dat er functionaliteiten ontbreken in Cisco Identity Services Engine. De betreffende missende functionaliteiten zijn 'Industriële gerichtheid, incl. goede support voor staticshe ip adressen.' en 'Saml integratie in een samenwerking met Azure AD en Captive portal voor byod.’
-.
+18.2\% van de personen die de enquête invulden vinden dat er functionaliteiten ontbreken in Cisco Identity Services Engine. De betreffende missende functionaliteiten zijn 'Industriële gerichtheid, incl. goede support voor staticshe ip adressen.' en 'Saml integratie in een samenwerking met Azure AD en Captive portal voor byod.’.
 
 
 Tot slot kreeg Cisco Identity Services Engine een gemiddelde beoordeling van 3.91 op 5 waarbij 90.9\% van de geënquêteerden dit product zou aanbevelen aan anderen.
