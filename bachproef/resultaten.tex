@@ -86,16 +86,41 @@ Ten slotte toont figuur \ref{fig:ping} aan dat het eindapparaat na blokkade van 
 	\label{fig:ping}
 \end{figure}
 
-
-Men bekomt door het gebruik van Cisco Idendity Services Engine en use cases 'Port-based en Policy-based network access control' een positieve resultaat. Hieruit kan men uit de resultaten van de proef afleiden dat 'Port-based en Policy-based network access control' het bedrijfsnetwerk zeker en vast veiliger maakt tegen criminelen die het netwerk willen binnentreden. Dit komt door de beschikbare interfaces. Werknemers zullen in het vervolg zich eerst moeten aanmelden met de Cisco Identity Services Engine gegevens alvorens men voor de eerste keer connectie wilt maken met het netwerk. Nadien blijven deze gegevens opgeslagen op het eind apparat. Zo kan men steeds probleemloos verbinden met het netwerk via de Ethernet kabel.
-
 In de sectie \ref{sec:trepo} worden de resultaten van Tread-Centric en Policy-based network access control besproken. Voor meer uitleg over de volledige conclusie kan men terecht in Hoofdstuk \ref{ch:conclusie}.
 
 
-\subsection{Tread-Centric en Policy-based network access control}
+\subsection{Thread-Centric en Policy-based network access control}
 \label{sec:trepo}
-	!!!TO DO!!! Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed euismod velit, sed hendrerit justo. Praesent a hendrerit diam, ut imperdiet enim. In placerat nisl et commodo laoreet. Nullam convallis semper nibh nec cursus. Pellentesque a urna iaculis, eleifend turpis sit amet, varius velit. Nulla vitae est euismod, feugiat sem quis, fringilla nibh. Quisque ornare orci nisl, non pretium felis tempor id. Proin varius fermentum velit eu imperdiet. Praesent quis dolor at metus ornare dignissim sed finibus mauris. Maecenas pellentesque, ante ac vulputate dapibus, nisl nisi tristique libero, eu sollicitudin dolor est nec quam. Sed in lobortis sem. Phasellus nec diam eu magna lacinia tincidunt vitae in elit.
+In dit onderdeel van het onderzoek ligt de focus op de resultaten van de 'Thread-centric en policy-based network access control' use cases. De resultaten zouden moeten uitwijzen wanneer het eindapparaat een kwetsbaarheid niveau van 4 of meer behaald zou Cisco Identity Services Engine dit eindapparaat in quarantaine moeten plaatsen.
+\newline
+\newline
+Figuur \ref{fig:api} indiceert dat gebruiker 'TestV5' met zijn eindapparaat zonder enige problemen kan aansluiten op het netwerk dat gelinkt werd met het 'WIRED\textunderscore VA\textunderscore USER' Authorization Profile. Na enkele minuten ontvangt Cisco Identity Services Engine het rapport van Rapid7 Nexpose en merkt dat het eindapparaat een Nexpose-CVSS\textunderscore Base\textunderscore Score heeft van 6.2. Dit heeft een hogere score dan in de policy rule werd voorzien. Hierbij plaatst Cisco Identity Services Engine het eindapparaat in de 'WIRED\textunderscore VA\textunderscore QUARANTINE' Authorization Profile dat geen toegang heeft tot het netwerk. 
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[height=0.20\textheight]{ThreadSucceeded.png}
+	\caption{Grafiek resultaat vraag 2}
+	\label{fig:api}
+\end{figure}
+
+Figuur \ref{fig:rapid} demonstreert het Rapid7 Nexpose scan rapport van asset '192.168.17.6' dat getriggerd werd door Cisco Identity Services Engine. Hierbij is een kwetsbaarheid weergegeven die een Base\textunderscore Score heeft van 6.2.
+\begin{figure}[H]
+	\centering
+	\includegraphics[height=0.20\textheight]{InsightVM_base.png}
+	\caption{Grafiek resultaat vraag 2}
+	\label{fig:rapid}
+\end{figure}
+Vervolgens kan men een Base\textunderscore Score van 6.2 terugvinden in het Authorization Profile rapport dat werd gegenereerd door Cisco Identity Services Engine. Zoals men ziet ligt dit volledig in lijn met de Base\textunderscore Score van het Rapid7 Nexpose scan rapport. Dit Authorization Profile rapport wordt weergegeven in figuur \ref{fig:detail}. 
+\begin{figure}[H]
+	\centering
+	\subfloat{{\includegraphics[width=6cm]{thread_overview_va_Quar.png} }}%
+	\qquad
+	\subfloat{{\includegraphics[width=6cm]{thread_base.png} }}%
+	\caption{Proef resultaat met een employee gebruiker}%
+	\label{fig:detail}%
+\end{figure}
+
+Bij dezen werden de resultaten van 'Thread-centric en Policy-based network access control' besproken. De resultaten hiervan zijn verwerkt in Hoofstuk \ref{ch:conclusie}.
 \section{Cisco Identity Services Engine enquête}
 \label{sec:enqueteISe}
 In deze sectie worden de resultaten van de enquête globaal besproken. Indien men meer informatie wenst over de resultaten per vraag kan men Bijlage \ref{ch:Resultaten_enquête} raadplegen.
