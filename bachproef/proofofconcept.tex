@@ -226,11 +226,40 @@ De Cisco switch behoord tot de ‘Catalyst 2960-CX’ series die nu gekend staat
 \end{figure}
 
 \subsection{Virtuele machines}
+\subsubsection{Rapid7 Nexpose}
+De Rapid7 Nexpose is een Windows Server 2019 datacenter virtuele machine dat in het bachelorproef.com domein werd toegevoegd. Op deze virtuele machine draait de Rapid Nexpose software genaamd InsideVM. Rapid Nexpose is een oplossing voor het kwetsbaarheidsbeheer die risico's analyseert over kwetsbaarheden, configuraties en controles. Gebruikers kunnen op hun manier kwetsbaarheden in besturingssystemen, software van derden, webapplicaties, browsers en databases efficiënt beheren en problemen met verkeerde configuratie identificeren. De Rapid7 Nexpose virtuele machine werd specifiek gebruikt in combinatie met de Cisco Identity Services Engine virtuele machine voor het Thread-centric network access control use case. Op figuur \ref{fig:nexpose} is de home pagina van InsideVM weergegeven die u een visueel beeld geeft van de Rapid7 Nexpose software.
+\newline\newline
+Daarnaast werd de virtuele machine voorzien van de volgende specificaties: 
+\begin{itemize}
+	\item Geheugen: 48 GB Random Access Memory
+	\item Opslag: 356 GB
+	\item CPU: 24 cores
+	\item Netwerk adapter: Cisco\textunderscore netwerk
+\end{itemize}
+
+Meer informatie over de installatie van Rapid7 Nexpose kan men terug vinden op de website van Rapid7(\cite{rapid7}).
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.9\textwidth]{nexpose.png}
+	\caption{Home pagina van InsideVM}%
+	\label{fig:nexpose}%
+\end{figure}
+
 \subsubsection{Cisco Identity Services Engine}
-De eerste virtuele machine waarop dieper wordt op ingegaan is Cisco Identity Services Engine. Deze virtuele machine zal zich verdiepen in de use cases: 'Port-based network access control', 'Policy-based network access control' en 'Thread-centric network access control'. Daarvoor zijn een aantal configuraties uitgevoerd op de virtuele machine van Cisco Identity Services Engine om een antwoord te geven het onderzoek. Hieronder worden de configuraties opgesplitst per use cases, waarbij de use cases vaak in de praktijk worden gecombineerd. De resultaten van de Cisco Identity Services Engine configuraties vindt men terug in Hoofdstuk \ref{ch:Resultaten}.
+De tweede virtuele machine waarop dieper wordt op ingegaan is Cisco Identity Services Engine. Deze virtuele machine zal zich verdiepen in de use cases: 'Port-based network access control', 'Policy-based network access control' en 'Thread-centric network access control'. Daarvoor zijn een aantal configuraties uitgevoerd op de virtuele machine van Cisco Identity Services Engine om een antwoord te geven het onderzoek. Hieronder worden de configuraties opgesplitst per use cases, waarbij de use cases vaak in de praktijk worden gecombineerd. De resultaten van de Cisco Identity Services Engine configuraties vindt men terug in Hoofdstuk \ref{ch:Resultaten}.
 \newline
 \newline
 Alvorens men dieper ingaat op de use cases werd Cisco Identity Services Engine toegevoegd aan het Active Directory Domain. Figuren \ref{fig:AD_Cisco1} en \ref{fig:AD_Cisco2} tonen aan dat de virtuele machine van Cisco Identity Services Engine probleemloos toegevoegd is aan het domein 'Bachelorproef.com'. Dit toont aan dat Cisco Identity Services Engine eenvoudig geïntegreerd kan worden met een domein waarbij extra policy rules  in de toekomst kunnen ingevoerd worden. Dit onderzoek focust zich op de bescherming van de beschikbare interfaces op de Cisco switch. Dit door een extra authenticatie methode te voorzien en dus niet door een integratie van 'Port-based network access control' met het gebruik van Active Directory Domain users.
+
+Verder werd systeem geïnstalleerd op een Red Hat Enterprise 7 distributie, waar volgende specificaties voor werd vrijgemaakt: 
+
+\begin{itemize}
+	\item Geheugen: 128 GB Random Access Memory
+	\item Opslag: 512 GB
+	\item CPU: 24 cores
+	\item Netwerk adapter: Cisco\textunderscore netwerk
+\end{itemize}
 
 De installatie van Cisco Identity Services Engine werd mogelijk door \cite{CiscoISE_InstallationGuide}.
 
@@ -247,22 +276,20 @@ De installatie van Cisco Identity Services Engine werd mogelijk door \cite{Cisco
 	\caption{Active Directory Users en Computers}
 	\label{fig:AD_Cisco2}
 \end{figure}
- \subsubitem{\textbf{Port- en Policy-based network access control }}
+
+\setlength{\parindent}{5ex}\fontsize{12}{20}\textbf{Port- en Policy-based network access control }
  \newline
 	Eerder werd vernoemd in sectie \ref{sec:config} dat er implementatie van 'Port-based network access control' configuraties op de Cisco switch verplicht zijn. Op dit onderdeel van de sectie ligt de focus op de configuratie van de 'Port-based network access control' use case in de Cisco Identity Services Engine webbrowser. 
 	\newline
 	\newline
 	De Configuratie wordt gestart met de creatie van een aantal Cisco Identity Services Engine users in het 'Identity Management' tablad. In figuur \ref{fig:users} ziet men twee aangemaakte users waarbij user 'TestV2' zich in de groep 'Employees' bevindt en user 'Test' niet. Dit zal zich uiten wanneer een gebruiker zich aanmeldt met user 'Test'. Hierbij zal hij geen toegang krijgen tot het netwerk aan de hand van een policy rule.
-
-	
  	\begin{figure}[H]
  		\centering
  		\includegraphics[width=0.9\textwidth]{Port_users.png}
  		\caption{Cisco Identity Services Engine users}%
  		\label{fig:users}%
  	\end{figure}
- 	
- 	Vervolgens werd in het tablad 'Network Resources' de Cisco switch vastgelegd waardoor Cisco Identity Services Engine communicatie met het netwerk apparaat kan vaststellen. Figuur \ref{fig:ISESwitch} toont de configuratie voor deze communicatie. 
+ Vervolgens werd in het tablad 'Network Resources' de Cisco switch vastgelegd waardoor Cisco Identity Services Engine communicatie met het netwerk apparaat kan vaststellen. Figuur \ref{fig:ISESwitch} toont de configuratie voor deze communicatie. 
  	
  	 	\begin{figure}[H]
  		\centering
@@ -279,19 +306,81 @@ De installatie van Cisco Identity Services Engine werd mogelijk door \cite{Cisco
 		\caption{Configuratie van de 802.1x policy rule in ISE}%
 		\label{fig:ISESwitch}%
 		\end{figure}
-
- \subsubitem{\textbf{Thread-centri- en Policy-based network access control }}
-  \newline
-	!!!TO DO!!! Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed euismod velit, sed hendrerit justo. Praesent a hendrerit diam, ut imperdiet enim. In placerat nisl et commodo laoreet. Nullam convallis semper nibh nec cursus. Pellentesque a urna iaculis, eleifend turpis sit amet, varius velit. Nulla vitae est euismod, feugiat sem quis, fringilla nibh. Quisque ornare orci nisl, non pretium felis tempor id. Proin varius fermentum velit eu imperdiet. Praesent quis dolor at metus ornare dignissim sed finibus mauris. Maecenas pellentesque, ante ac vulputate dapibus, nisl nisi tristique libero, eu sollicitudin dolor est nec quam. Sed in lobortis sem. Phasellus nec diam eu magna lacinia tincidunt vitae in elit.
+	
+	Om de Port-based en Policy-based network access control use case uit te breiden werd een 'Authorization Policy - Global Exceptions' ingevoerd zodat toegang op het netwerk met een Ethernet kabel vanuit de Cisco switch enkel mogelijk is op bepaalde weekdagen. Zo kunnen bedrijven een policy rule implementeren die de toegang naar het netwerk op weekend dagen blokkeert. Op figuur \ref{fig:weekend} is de Global Exceptions policy rule terug te vinden waarbij men de policy rule test in Hoofdstuk \ref{ch:Resultaten}. 
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.7\textwidth]{Disable_At_Weekend_policy.png}
+		\caption{Configuratie van de 802.1x weekend policy rule in ISE}%
+		\label{fig:weekend}%
+	\end{figure}
+\setlength{\parindent}{5ex}\fontsize{12}{20}\textbf{Thread-centric en Policy-based network access control }
+ \newline
+ \newline
+ In dit onderdeel van Cisco Identity Services Engine ligt de focus op de 'Thread-centric en Policy-based network access control' use case. Zoals voordien vermeld zijn de laatstgenoemde use cases gecombineerd omdat de Thread-centric network access control use case gebruikmaakt van policy rules. Hiervoor werd \cite{Rapid7_nexpose} als Thrid Party Vendor voor Tread-centric network access control gebruikt.
+ \newline
+ \newline
+ Om de configuratie van Thread-centric network access control te starten wordt de 'Thread-centric NAC service' ingeschakeld. Op figuur \ref{fig:serviceThread} is te zien dat de service in \textbf{Administration > System > Deployment} werd ingeschakeld.
  
-Verder werd systeem geïnstalleerd op een Red Hat Enterprise 7 distributie, waar volgende specificaties voor werd vrijgemaakt: 
+\begin{figure}[H]
+		 	\centering
+		 	\includegraphics[width=0.7\textwidth]{threadcentricService.png}
+		 	\caption{Thread-centric NAC service in ISE}%
+		 	\label{fig:serviceThread}%
+\end{figure}
 
-\begin{itemize}
-	\item Geheugen: 128 GB Random Access Memory
-	\item Opslag: 512 GB
-	\item CPU: 24 cores
-	\item Netwerk adapter: Cisco\textunderscore netwerk
+ Vervolgens werden de certificaten tussen Cisco Identity Services Engine, Windows Active Directory en Rapid7 Nexpose geconfigureerd. Indien men meer informatie wenst over de configuratie van deze certificaten kan men \cite{thread_yt} bekijken.
+ \newline
+ \newline
+ Als volgt zijn er aantal instellingen uitgevoerd op de Rapid7 Nexpose applicatie zoals de creatie van een site die de assets bevat. In dit geval werd een laptop die reeds verbonden was met het afgezonderd netwerk gebruikt als asset. Op het eind van de configuratie zal Cisco Identity Service Engine een automatisch scan starten wanneer de laptop zich aansluit op het netwerk. 
+ \newline
+ \newline
+ Communicatie tussen Cisco Identity Services Engine en Rapid7 Nexpose werd mogelijk door een 'Vendor Instance' aan te maken. Op figuur \ref{fig:vendor} is de configuraties van de 'Vendor Instance' weergegeven.
+	 \begin{figure}[H]
+		 	\centering
+		 	\includegraphics[width=0.7\textwidth]{VendorRapid7.png}
+		 	\caption{Rapid7 Vendor Instance in ISE}%
+		 	\label{fig:vendor}%
+	 \end{figure}
+Nadien werden er Authorization Profiles aangemaakt die een Rapid7 Nexpose scan triggeren. Dit werd mogelijk door te navigeren naar \textbf{ Policy > Policy Elements > Results > Authorization > Authorization Profiles}. Er werden twee Authorization Profiles aangemaakt namelijk: 'WIRED\textunderscore VA\textunderscore USER' en 'WIRED\textunderscore VA\textunderscore QUARANTINE'. 
+ \newline
+\newline
+Wanneer een eind apparaat verbinding maakt met het netwerk langs de Cisco switch dan wordt het eind apparaat via 'WIRED\textunderscore VA\textunderscore USER' toegewezen. Vervolgens wordt een automatisch scan gestart in Rapid7 Nexpose die getriggerd wordt door Cisco Identity Services Engine. 
+ \newline
+\newline
+Indien het eind apparaat een bepaalde 'Nexpose-CVSS\textunderscore Base\textunderscore Score' heeft dan zal afhankelijk van de score het eind apparaat het 'WIRED\textunderscore VA\textunderscore QUARANTINE' Authorization Profiles toegewezen krijgen. Dit resulteert in een eind apparaat dat geen toegang meer heeft tot het netwerk. Figuur \ref{fig:WIRED} toont één configuratie van de Authorization Profiles namelijk de WIRED\textunderscore VA\textunderscore USER'. 
+\newline
+\newline
+Belangijk om te weten is dat de 'WIRED\textunderscore VA\textunderscore USER' Authorization Profile de volgende 'Attributes Details' kent: 
+	\begin{itemize}
+	\item Access Type = ACCESS\textunderscore ACCEPT
+	\item on-demand-scan-interval = 48
+	\item periodic-scan-enabled = 24	
+	\item va-adapter-instance = (Instance-id van de 'Adapter Instance')
 \end{itemize}
+
+ \begin{figure}[H]
+	 	\centering
+	 	\includegraphics[width=0.7\textwidth]{WIRED7.png}
+	 	\caption{Rapid7 Vendor Instance in ISE}%
+	 	\label{fig:WIRED}%
+ \end{figure}
+
+Tot slot zijn er nog de policy rules die eind apparaten toelaten of in
+quarantaine plaatsen. Op figuur \ref{fig:quarin} ziet men de policy rules die geïmplementeerd zijn voor het Thread-centric network access control use case. Hierbij werd de Dot1x policy rule aangepast zodanig dat de Profiles Results gebruikmaakt van 'WIRED\textunderscore VA\textunderscore USER'. Daarnaast werd er een 'Authorization Policy - Global Exceptions' ingevoerd die eind apparaten in quarantaine plaatsen indien het rapport van Rapid7 Nexpose uitwijst dat het eind apparaat een Nexpose-CVSS\textunderscore Base\textunderscore Score heeft groter dan 4. 
+
+  \begin{figure}[H]
+ 	\centering
+ 	\includegraphics[width=0.7\textwidth]{PolicyRuleThreadCentric.png}
+ 	\caption{PolicyrRules Thread-centric NAC in ISE}%
+ 	\label{fig:quarin}%
+ \end{figure}
+ 
+ De installatie van Thread-centric network access control in combinatie met Rapid7 Nexpose werd mogelijk door \cite{thread_yt}.
+
+ 
+
 
 \subsubsection{Windows server 2019 datacenter}
 Het gebruik van een Windows Server 2019 maakt de creatie van een Active Directory domein mogelijk. Een nieuwe forest werd hiervoor aangemaakt en de Windows Server 2019 werd meteen ook gepromoveerd naar de domeincontroller binnen het 'bachelrorproef.com' netwerk.
@@ -358,12 +447,22 @@ Dit werd in de Cisco Identity Services Engine omgeving ook gebruikt waarbij een 
 De installatie van de Jumphost werd mogelijk door \cite{Win19_InstallationGuide}. 
 
 \subsection{Begrippen}
-\subsubitem{\textbf{Telenet Access Point}} is een draadloze server die gegevens verzendt via radio golven in middel van een antenne. Deze gegevens worden ontvangen via het bedrage UTP netwerk waarbij deze “server” is op aan gesloten.
-\subsubitem{\textbf{Telenet Modem}} is een toestel die informatie van uw internetprovider ontvangt via een telefoonlijn, glasvezelkabel of coaxkabel in de woning en converteert dit naar een digitaal signaal.
-\subsubitem{\textbf{Coax kabel}} is een twee polige kabel die instaat voor het overdragen van beeld en geluid. Deze signalen treden gemakkelijker binnen, waarbij het signaal op korte afstanden snel zwak wordt. 
-\subsubitem{\textbf{Virtual local area network}} is een type virtueel network dat gerealiseerd wordt op de datalinklaag. Dit bestaat uit een groep eindstations en switches die logisch gezien één enkel gemeenschappelijk local area network (LAN) vormen.
-\subsubitem{\textbf{Local Area Network}} is een computernetwerk dat een relatief klein gebied beslaat. Meestal is een LAN beperkt tot een kamer, een gebouw of een groep gebouwen, waarbij een LAN kan via telefoonlijnen en radiogolven over elke afstand met andere LAN's kan communiceren.
-\subsubitem{\textbf{Wide Area Network}}  is een netwerk van apparaten, een verzameling van local area networks, die via draadloze of bekabelde communicatielijnen met elkaar verbonden zijn.
+\textbf{Telenet Access Point} is een draadloze server die gegevens verzendt via radio golven in middel van een antenne. Deze gegevens worden ontvangen via het bedrage UTP netwerk waarbij deze “server” is op aan gesloten.
+\newline
+\newline
+\textbf{Telenet Modem} is een toestel die informatie van uw internetprovider ontvangt via een telefoonlijn, glasvezelkabel of coaxkabel in de woning en converteert dit naar een digitaal signaal.
+\newline
+\newline
+\textbf{Coax kabel} is een twee polige kabel die instaat voor het overdragen van beeld en geluid. Deze signalen treden gemakkelijker binnen, waarbij het signaal op korte afstanden snel zwak wordt. 
+\newline
+\newline
+\textbf{Virtual local area network} is een type virtueel network dat gerealiseerd wordt op de datalinklaag. Dit bestaat uit een groep eindstations en switches die logisch gezien één enkel gemeenschappelijk local area network (LAN) vormen.
+\newline
+\newline
+\textbf{Local Area Network} is een computernetwerk dat een relatief klein gebied beslaat. Meestal is een LAN beperkt tot een kamer, een gebouw of een groep gebouwen, waarbij een LAN kan via telefoonlijnen en radiogolven over elke afstand met andere LAN's kan communiceren.
+\newline
+\newline
+\textbf{Wide Area Network} is een netwerk van apparaten, een verzameling van local area networks, die via draadloze of bekabelde communicatielijnen met elkaar verbonden zijn.
 
 \section{Cisco Identity Services Engine enquête}
 \label{sec:enquête}
