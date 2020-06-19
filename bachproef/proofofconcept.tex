@@ -5,7 +5,7 @@
 \chapter{\IfLanguageName{dutch}{Proof of concept}{Proefafdruk}}
 \label{ch:Proof of concept}
 
-Het doel van dit hoofdstuk is om een idee te creëren van de omgeving waarin Cisco Identity Services Engine is geïmplementeerd. Hierbij is een uitgebreide uitleg over de elementen die aanwezig zijn binnen de omgeving van Cisco terug te vinden in dit hoofdstuk. Ieder hardware apparaat is zorgvuldig beschreven, onder andere is er informatie te vinden over de specificatie, de configuraties en de instellingen van de hardware componenten. Daarnaast zijn ook de implementaties van de virtuele machines verder toegelicht.
+Het doel van dit hoofdstuk is om een idee te creëren van de omgeving waarin Cisco Identity Services Engine is geïmplementeerd. Een uitgebreide uitleg over de elementen die aanwezig zijn binnen de omgeving van Cisco is terug te vinden in dit hoofdstuk. Ieder hardwareapparaat is zorgvuldig beschreven, onder andere is er informatie te vinden over de specificatie, de configuraties en de instellingen van de hardware componenten. Daarnaast zijn ook de implementaties van de virtuele machines verder toegelicht.
 \newline
 \newline
 Samen met deze informatie zijn belangrijke schema’s verwerkt in dit hoofdstuk, die een visueel beeld geven over dit afgezonderd netwerk. 
@@ -13,9 +13,10 @@ Vervolgens is er de sectie die de enquête bespreekt. De bespreking van de enqu�
 
 \section{Cisco Identity Services Engine omgeving}
 
-Voor de implementaties en testen van Cisco Identity Services Engine en zijn benodigde use cases is er een omgeving vereist. Deze omgeving is voorzien door een Belgische aanbieder van digitale televisie, breedband-internet, mobiele telefonie, gekend als Telenet Group N.V. Implementaties en de testen van Cisco Identity Services Engine en met zijn benodigde use cases is uitgewerkt in een Telenet thuisnetwerk.
+Voor de implementaties en proeven van Cisco Identity Services Engine en zijn benodigde use cases is er een omgeving vereist. Deze omgeving is voorzien door een Belgische aanbieder van digitale televisie, breedband-internet, mobiele telefonie, gekend als Telenet Group N.V. Implementaties en de proeven van Cisco Identity Services Engine en met zijn benodigde use cases is uitgewerkt in een Telenet thuisnetwerk.
 \newline
-Zoals elk thuisnetwerk dat voorzien is door een Belgische internet aanbieder bevat het thuisnetwerk een aantal Telenet Access Points en een Telenet modem. De kabelverbinding die data verzend vanuit de Telenet centrale naar de Telenet modem is een coaxkabel. Het is dankzij de coaxkabel dat het thuisnetwerk verbonden is met het Wide Area Network, ook gekend als WAN.
+\newline
+Zoals elk thuisnetwerk dat voorzien is door een Belgische internet aanbieder bevat het thuisnetwerk een aantal Telenet Access Points en een Telenet modem. De kabelverbinding die data verzendt vanuit de Telenet centrale naar de Telenet modem is een coaxkabel. Het is dankzij de coaxkabel dat het thuisnetwerk verbonden is met het Wide Area Network, ook gekend als WAN.
 \newline
 \newline
 Om de essentiële componenten van dit thuisnetwerk te beschermen tegen breuk, is de implementatie verder uitgewerkt in een afgezonderd netwerk. Dit wordt mogelijk gemaakt met behulp van een virtuele opensource router/firewall zoals Pfsense. Dit virtuele routertje dient als gateway voor de verschillende vlan’s waarbij het thuisnetwerk gebruikt zal worden als ‘uplink’ naar het internet. 
@@ -50,13 +51,12 @@ Dit is de veiligste en snelste methode maar ook het duurste. Het is een dure met
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[height=0.25\textheight]{Raid10.png}
+	\includegraphics[width=0.75\textwidth]{Raid10.png}
 	\caption{Voorbeeld configuratieschema RAID 10 (\cite{Raid10}).}
 	\label{fig:Raid10}
 \end{figure}
-
-Vervolgens zijn er in de VMware ESXi server opstelling drie van de vier fysieke ethernet adapters gebruikt. Deze adapters zijn op hun beurt verbonden met een virtuele switch. Elke fysieke adapters heeft een andere functie die weergegeven zijn in de onderstaande lijst. 
-
+\newpage
+Vervolgens zijn er in de VMware ESXi server opstelling drie van de vier fysieke ethernet adapters gebruikt. Deze adapters zijn op hun beurt verbonden met een virtuele switch. Elke fysieke adapter heeft een andere functie die weergegeven zijn in de onderstaande lijst. 
 
 \begin{itemize}
 	\item vmnic0,is de fysieke adapter die verbonden is met de virtuele switch, genaamd 'VSwitch0'.
@@ -64,41 +64,40 @@ Vervolgens zijn er in de VMware ESXi server opstelling drie van de vier fysieke 
 	\item vmnic3,is de fysieke adapter die verbonden is met de virtuele switch, genaamd 'Cisco \textunderscore switch'.
 \end{itemize}
 
-\newpage
 \subsubsection{Virtuele switches}
 \subsubitem{\bf VSwitch0}
 \newline
 De 'VSwitch0' is een virtuele switch die voorzien is om de VMware ESXi server te contacteren via de webbrowser. Op figuur \ref{fig:Vswitch0} ziet men dat de 'VSwitch0' is ingesteld met vlan id 0, dat geen vlan identificatie voorziet. 
 \newline
 \newline
-TCP/IP pakketen passeren deze interface wanneer gebruikers surfen naar "https://192.168.0.183". Vervolgens passeert de TCP/IP pakketen langs vmnic0 die de informatie doorgeeft aan de VSwitch0. Wanneer de informatie terecht komt op de VSwitch0, stuurt hij op zijn beurt dit door naar de VMKernel poort.
+TCP/IP pakketen passeren deze interface wanneer gebruikers surfen naar "https://192.168.0.183". Vervolgens passeert de TCP/IP pakketen langs vmnic0 die de informatie doorgeeft aan de VSwitch0. Wanneer de informatie terecht komt op de VSwitch0, stuurt hij dit op zijn beurt door naar de VMKernel poort.
 
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.7\textwidth]{VSwitch0.png}
+	\includegraphics[width=0.9\textwidth]{VSwitch0.png}
 	\caption{Topologie van de 'VSwitch0'}
 	\label{fig:Vswitch0}
 \end{figure}
-
+\newpage
 \subsubitem{\bf Sub\textunderscore switch}
 \newline
 Op figuur \ref{fig:subswitch} ziet men dat de 'Sub\textunderscore switch' een virtuele switch is die gebruikt wordt voor de WAN interface van de Pfsense. De Wide Area Network interface voorziet data overdracht van het thuisnetwerk naar het afgezonderd LAN netwerk. Hierdoor is connectie met het afgezonderd netwerk mogelijk via deze interface. Bovendien wordt deze virtuele switch ook gebruikt door de jumphost om remote desktop protocol connecties te maken met de virtuele machines binnen het afgezonderd LAN netwerk. 
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.7\textwidth]{Subswitch.png}
+	\includegraphics[width=0.9\textwidth]{Subswitch.png}
 	\caption{Topologie van de 'Sub\textunderscore switch'}
 	\label{fig:subswitch}
 \end{figure}
-\newpage
+
 \subsubitem{\bf Cisco\textunderscore switch}
 \newline
-Tot slot is er de 'Cisco\textunderscore switch' die gebruikt wordt om connectie te maken met alle apparaten, achterliggend de fysieke Cisco switch. Wanneer eind apparaten met de Cisco switch verbinden, zal de data passeren via de 'Cisco\textunderscore switch'. Op de figuur \ref{fig:Ciscoswitch} is ook te zien dat alle virtuele machines zich in deze omgeving bevinden. Dit zorgt ervoor dat de Cisco\textunderscore switch ingesteld is met vlan id 10, waarbij enkel data vanuit vlan 10 wordt doorgestuurd naar de voorziene eind apparaten.
+Tot slot is er de 'Cisco\textunderscore switch' die gebruikt wordt om connectie te maken met alle apparaten, achterliggend de fysieke Cisco switch. Wanneer eind apparaten met de Cisco switch verbinden, zullen de data passeren via de 'Cisco\textunderscore switch'. Op de figuur \ref{fig:Ciscoswitch} is ook te zien dat alle virtuele machines zich in deze omgeving bevinden. Dit zorgt ervoor dat de Cisco\textunderscore switch ingesteld is met vlan id 10, waarbij enkel data vanuit vlan 10 worden doorgestuurd naar de voorziene eind apparaten.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.7\textwidth]{CiscoSwitch_vmware.png}
+	\includegraphics[width=0.9\textwidth]{CiscoSwitch_vmware.png}
 	\caption{Topologie van de 'Cisco\textunderscore switch'}
 	\label{fig:Ciscoswitch}
 \end{figure}
@@ -136,11 +135,11 @@ Het model van de VMware ESXi server is ‘System x3350 M3’ dat gekend staat bi
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.5\textwidth]{serveresxi.png}
+	\includegraphics[width=0.7\textwidth]{serveresxi.png}
 	\caption{Foto van de ESXi VMware server}
 	\label{fig:VmwareSer}
 \end{figure}
-
+\newpage
 \subsection{Cisco switch}
 Naast de VMware ESXi server, bestaat de Cisco Identity Services Engine omgeving ook uit een Cisco switch. Op figuur \ref{fig:switch} ziet men een foto van de Cisco switch. Dankzij een aantal configuraties op de Cisco switch kan de Cisco Identity Services Engine virtuele machine communiceren met de fysieke switch. Deze noodzakelijke configuraties speelden een belangrijke rol in de configuratie van de 'Port-based network access control' use case. 
 \newline
@@ -150,7 +149,7 @@ Door een aantal basis configuraties op deze switch uit te voeren, wordt communic
 
 \subsubsection{Configuratie}
 \label{sec:config}
-Als eerst zijn een aantal commando's uitgevoerd die het netwerk apparaat beveiligen met een secret, line passwords en password encryption om inbreuk tegen te gaan. Vervolgens werd Gigabit Ethernet 0/1 geconfigureerd met de gepaste trunk settings om de gobale communicatie mogelijk te maken. Een trunk configuratie maakt data overdracht van de verschillende vlan's mogelijk. Volgende twee trunk commando's zijn hiervoor uitvoerd:  
+Vooreerst zijn een aantal commando's uitgevoerd die het netwerk apparaat beveiligen met een secret, line passwords en password encryption om inbreuk tegen te gaan. Vervolgens werd Gigabit Ethernet 0/1 geconfigureerd met de gepaste trunk settings om de gobale communicatie mogelijk te maken. Een trunk configuratie maakt data overdracht van de verschillende vlan's mogelijk. Volgende twee trunk commando's zijn hiervoor uitvoerd:  
 
 \begin{itemize}
 	\item switchport mode trunk
@@ -187,15 +186,15 @@ Om de configuraties van de Cisco switch te beëindeigen, werd dot1x system-auth-
 
 \begin{figure}[H]
 	\centering
-	\subfloat{{\includegraphics[width=3cm]{Switch_config1.png} }}%
+	\subfloat{{\includegraphics[width=4cm]{Switch_config1.png} }}%
 	\qquad
-	\subfloat{{\includegraphics[width=3cm]{Switch_config2.png} }}%
+	\subfloat{{\includegraphics[width=4cm]{Switch_config2.png} }}%
 	\qquad
-	\subfloat{{\includegraphics[width=3cm]{Switch_config3.png} }}%
+	\subfloat{{\includegraphics[width=4cm]{Switch_config3.png} }}%
 	\caption{Running config van de Cisco switch}%
 	\label{fig:RunningConfig}%
 \end{figure}
-Verder zijn 1G cat5e ethernet kabels gebruikt om de hardware componenten met elkaar te laten communiceren. De Unshielded Twisted Pair Ethernet kabels halen snelheden tot 1000 Mbit/s met een doorvoersnelheid van 100mhz. Wat geschikt is voor dit afgezonderd netwerk.
+Verder zijn 1G cat5e ethernet kabels gebruikt om de hardware componenten met elkaar te laten communiceren. De Unshielded Twisted Pair Ethernet kabels halen snelheden tot 1000 Mbit/s met een doorvoersnelheid van 100mhz wat geschikt is voor dit afgezonderd netwerk.
 
 \subsubsection{Cisco switch specificaties}
 De Cisco switch behoord tot de ‘Catalyst 2960-CX’ series die nu gekend staat binnen Axians als de ‘Demo switch’. Hierbij vindt men in onderstaande lijst de specificaties van de Cisco Catalyst 2960-CX serie switch:
@@ -220,11 +219,11 @@ De Cisco switch behoord tot de ‘Catalyst 2960-CX’ series die nu gekend staat
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.5\textwidth]{ciscoswitch.png}
+	\includegraphics[width=0.7\textwidth]{ciscoswitch.png}
 	\caption{Foto van de Cisco switch}
 	\label{fig:switch}
 \end{figure}
-
+\newpage
 \subsection{Virtuele machines}
 \subsubsection{Rapid7 Nexpose}
 De Rapid7 Nexpose is een Windows Server 2019 datacenter virtuele machine dat in het bachelorproef.com domein werd toegevoegd. Op deze virtuele machine draait de Rapid Nexpose software genaamd InsideVM. Rapid Nexpose is een oplossing voor het kwetsbaarheidsbeheer die risico's analyseert over kwetsbaarheden, configuraties en controles. Gebruikers kunnen op hun manier kwetsbaarheden in besturingssystemen, software van derden, webapplicaties, browsers en databases efficiënt beheren en problemen met verkeerde configuratie identificeren. De Rapid7 Nexpose virtuele machine werd specifiek gebruikt in combinatie met de Cisco Identity Services Engine virtuele machine voor het Thread-centric network access control use case. Op figuur \ref{fig:nexpose} is de home pagina van InsideVM weergegeven die u een visueel beeld geeft van de Rapid7 Nexpose software.
@@ -241,16 +240,16 @@ Meer informatie over de installatie van Rapid7 Nexpose kan men terug vinden op d
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.9\textwidth]{nexpose.png}
+	\includegraphics[width=1\textwidth]{nexpose.png}
 	\caption{Home pagina van InsideVM}%
 	\label{fig:nexpose}%
 \end{figure}
-
+\newpage
 \subsubsection{Cisco Identity Services Engine}
-De tweede virtuele machine waarop dieper wordt op ingegaan is Cisco Identity Services Engine. Deze virtuele machine zal zich verdiepen in de use cases: 'Port-based network access control', 'Policy-based network access control' en 'Thread-centric network access control'. Daarvoor zijn een aantal configuraties uitgevoerd op de virtuele machine van Cisco Identity Services Engine om een antwoord te geven het onderzoek. Hieronder worden de configuraties opgesplitst per use cases, waarbij de use cases vaak in de praktijk worden gecombineerd. De resultaten van de Cisco Identity Services Engine configuraties vindt men terug in Hoofdstuk \ref{ch:Resultaten}.
+De tweede virtuele machine waar dieper wordt op ingegaan, is Cisco Identity Services Engine. Deze virtuele machine zal zich verdiepen in de use cases: 'Port-based network access control', 'Policy-based network access control' en 'Thread-centric network access control'. Daarvoor zijn een aantal configuraties uitgevoerd op de virtuele machine van Cisco Identity Services Engine om een antwoord te geven het onderzoek. Hieronder worden de configuraties opgesplitst per use cases, waarbij de use cases vaak in de praktijk worden gecombineerd. De resultaten van de Cisco Identity Services Engine configuraties vindt men terug in Hoofdstuk \ref{ch:Resultaten}.
 \newline
 \newline
-Alvorens men dieper ingaat op de use cases werd Cisco Identity Services Engine toegevoegd aan het Active Directory Domain. Figuren \ref{fig:AD_Cisco1} en \ref{fig:AD_Cisco2} tonen aan dat de virtuele machine van Cisco Identity Services Engine probleemloos toegevoegd is aan het domein 'Bachelorproef.com'. Dit toont aan dat Cisco Identity Services Engine eenvoudig geïntegreerd kan worden met een domein waarbij extra policy rules  in de toekomst kunnen ingevoerd worden. Dit onderzoek focust zich op de bescherming van de beschikbare interfaces op de Cisco switch. Dit door een extra authenticatie methode te voorzien en dus niet door een integratie van 'Port-based network access control' met het gebruik van Active Directory Domain users.
+Alvorens men dieper ingaat op de use cases werd Cisco Identity Services Engine toegevoegd aan het Active Directory Domain. Figuren \ref{fig:AD_Cisco1} en \ref{fig:AD_Cisco2} tonen aan dat de virtuele machine van Cisco Identity Services Engine probleemloos toegevoegd is aan het domein 'Bachelorproef.com'. Dit toont aan dat Cisco Identity Services Engine eenvoudig geïntegreerd kan worden met een domein waarbij extra policy rules  in de toekomst kunnen ingevoerd worden. Dit onderzoek focust zich op de bescherming van de beschikbare interfaces op de Cisco switch, dit door een extra authenticatie methode te voorzien en dus niet door een integratie van 'Port-based network access control' met het gebruik van Active Directory Domain users.
 
 Verder werd systeem geïnstalleerd op een Red Hat Enterprise 7 distributie, waar volgende specificaties voor werd vrijgemaakt: 
 
@@ -265,14 +264,14 @@ De installatie van Cisco Identity Services Engine werd mogelijk door \cite{Cisco
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.9\textwidth]{AD_ise.png}
+	\includegraphics[width=1\textwidth]{AD_ise.png}
 	\caption{Cisco ISE gelinkt met het AD domein}%
 	\label{fig:AD_Cisco1}%
 \end{figure}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.7\textwidth]{ADComputers.png}
+	\includegraphics[width=0.8\textwidth]{ADComputers.png}
 	\caption{Active Directory Users en Computers}
 	\label{fig:AD_Cisco2}
 \end{figure}
@@ -286,7 +285,7 @@ De installatie van Cisco Identity Services Engine werd mogelijk door \cite{Cisco
 	De Configuratie wordt gestart met de creatie van een aantal Cisco Identity Services Engine users in het 'Identity Management' tablad. In figuur \ref{fig:users} ziet men twee aangemaakte users waarbij user 'TestV2' zich in de groep 'Employees' bevindt en user 'Test' niet. Dit zal zich uiten wanneer een gebruiker zich aanmeldt met user 'Test'. Hierbij zal hij geen toegang krijgen tot het netwerk aan de hand van een policy rule.
  	\begin{figure}[H]
  		\centering
- 		\includegraphics[width=0.9\textwidth]{Port_users.png}
+ 		\includegraphics[width=1\textwidth]{Port_users.png}
  		\caption{Cisco Identity Services Engine users}%
  		\label{fig:users}%
  	\end{figure}
@@ -294,7 +293,7 @@ De installatie van Cisco Identity Services Engine werd mogelijk door \cite{Cisco
  	
  	 	\begin{figure}[H]
  		\centering
- 		\includegraphics[width=0.7\textwidth]{ISESwitch.png}
+ 		\includegraphics[width=0.9\textwidth]{ISESwitch.png}
  		\caption{Configuratie van de Cisco switch in ISE}%
  		\label{fig:ISESwitch}%
  		\end{figure}
@@ -303,16 +302,16 @@ De installatie van Cisco Identity Services Engine werd mogelijk door \cite{Cisco
  	
 	 	 \begin{figure}[H]
 		\centering
-		\includegraphics[width=0.7\textwidth]{PolicySet_Port.png}
+		\includegraphics[width=0.9\textwidth]{PolicySet_Port.png}
 		\caption{Configuratie van de 802.1x policy rule in ISE}%
 		\label{fig:ISESwitch}%
 		\end{figure}
-	
+	\newpage
 	Om de Port-based en Policy-based network access control use case uit te breiden werd een 'Authorization Policy - Global Exceptions' ingevoerd zodat toegang op het netwerk met een Ethernet kabel vanuit de Cisco switch enkel mogelijk is op bepaalde weekdagen. Zo kunnen bedrijven een policy rule implementeren die de toegang naar het netwerk op weekend dagen blokkeert. Op figuur \ref{fig:weekend} is de Global Exceptions policy rule terug te vinden waarbij men de policy rule test in Hoofdstuk \ref{ch:Resultaten}. 
 	
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=0.7\textwidth]{Disable_At_Weekend_policy.png}
+		\includegraphics[width=0.9\textwidth]{Disable_At_Weekend_policy.png}
 		\caption{Configuratie van de 802.1x weekend policy rule in ISE}%
 		\label{fig:weekend}%
 	\end{figure}
@@ -326,7 +325,7 @@ De installatie van Cisco Identity Services Engine werd mogelijk door \cite{Cisco
  
 \begin{figure}[H]
 		 	\centering
-		 	\includegraphics[width=0.7\textwidth]{threadcentricService.png}
+		 	\includegraphics[width=0.9\textwidth]{threadcentricService.png}
 		 	\caption{Thread-centric NAC service in ISE}%
 		 	\label{fig:serviceThread}%
 \end{figure}
@@ -340,7 +339,7 @@ De installatie van Cisco Identity Services Engine werd mogelijk door \cite{Cisco
  Communicatie tussen Cisco Identity Services Engine en Rapid7 Nexpose werd mogelijk door een 'Vendor Instance' aan te maken. Op figuur \ref{fig:vendor} is de configuraties van de 'Vendor Instance' weergegeven.
 	 \begin{figure}[H]
 		 	\centering
-		 	\includegraphics[width=0.7\textwidth]{VendorRapid7.png}
+		 	\includegraphics[width=0.9\textwidth]{VendorRapid7.png}
 		 	\caption{Rapid7 Vendor Instance in ISE}%
 		 	\label{fig:vendor}%
 	 \end{figure}
@@ -363,7 +362,7 @@ Belangijk om te weten is dat de 'WIRED\textunderscore VA\textunderscore USER' Au
 
  \begin{figure}[H]
 	 	\centering
-	 	\includegraphics[width=0.7\textwidth]{WIRED7.png}
+	 	\includegraphics[width=0.9\textwidth]{WIRED7.png}
 	 	\caption{Rapid7 Vendor Instance in ISE}%
 	 	\label{fig:WIRED}%
  \end{figure}
@@ -373,7 +372,7 @@ quarantaine plaatsen. Op figuur \ref{fig:quarin} ziet men de policy rules die ge
 
   \begin{figure}[H]
  	\centering
- 	\includegraphics[width=0.7\textwidth]{PolicyRuleThreadCentric.png}
+ 	\includegraphics[width=0.9\textwidth]{PolicyRuleThreadCentric.png}
  	\caption{PolicyrRules Thread-centric NAC in ISE}%
  	\label{fig:quarin}%
  \end{figure}
@@ -402,7 +401,7 @@ Om de Windows server 2019 datacenter te gebruiken werden volgende specificaties 
 	\item Netwerk adapter: Cisco\textunderscore netwerk
 \end{itemize}
 
-Als laatstse werd de installatie van Windows Server 2019 datacenter mogelijk door \cite{Win19_InstallationGuide}. 
+Als laatsts werd de installatie van Windows Server 2019 datacenter mogelijk door \cite{Win19_InstallationGuide}. 
 
 \subsubsection{Pfsense}
 De Pfsense virtuele machine verwijst naar de virtuele router waarbij één interface van de Pfsense gebruikt wordt als gateway voor alle vlan’s en van alle componenten die zich achter de Cisco switch bevinden. Vervolgens wordt de WAN interface van de Pfsense gebruikt om de data van en naar de Local Area Network interface te sturen. Hierdoor is er communicatie vanuit het thuisnetwerk met het afgezonderd netwerk mogelijk.
@@ -411,7 +410,7 @@ De Pfsense virtuele machine verwijst naar de virtuele router waarbij één inter
 De pfsense is enkel te contacteren binnen het afgezonderd netwerk door ‘Hypertext Transfer Protocol (HTTP)’ te gebruiken. Met andere woorden kunnen enkel machines in het netwerk '192.168.17.0/24' de Pfsense interface bereiken door te surfen naar het ip-adres: '192.168.17.1'. Op figuur \ref{fig:Pfsense} is te zien dat de home interface van de Pfsense te bereiken is via 'http://192.168.17.1/'.
 \newline
 \newline
-Ten slotte werd dit systeem geïnstalleerd op een Free Berkeley Software Distribution, waar volgende specificaties zijn voor vrijgemaakt:  
+Ten slotte werd dit systeem geïnstalleerd op een Free Berkeley Software Distribution, waarvoor volgende specificaties zijn vrijgemaakt:  
 
 \begin{itemize}
 	\item Geheugen: 4 GB Random Access Memory
@@ -423,7 +422,7 @@ De installatie van Pfsense werd mogelijk gemaakt door \cite{Pfsense_Installation
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.7\textwidth]{PfsenseHome.png}
+	\includegraphics[width=0.9\textwidth]{PfsenseHome.png}
 	\caption{Home interface Pfsense}
 	\label{fig:Pfsense}
 \end{figure}
@@ -446,10 +445,10 @@ Dit werd in de Cisco Identity Services Engine omgeving ook gebruikt waarbij een 
 De installatie van de Jumphost werd mogelijk door \cite{Win19_InstallationGuide}. 
 
 \subsection{Begrippen}
-\textbf{Telenet Access Point} is een draadloze server die gegevens verzendt via radio golven in middel van een antenne. Deze gegevens worden ontvangen via het bedrage UTP netwerk waarbij deze “server” is op aan gesloten.
+\textbf{Telenet Access Point} is een draadloze server die gegevens verzendt via radio golven door middel van een antenne. Deze gegevens worden ontvangen via het bedrage UTP netwerk waarbij deze “server” is op aan gesloten.
 \newline
 \newline
-\textbf{Telenet Modem} is een toestel die informatie van uw internetprovider ontvangt via een telefoonlijn, glasvezelkabel of coaxkabel in de woning en converteert dit naar een digitaal signaal.
+\textbf{Telenet Modem} is een toestel dat informatie van de internetprovider ontvangt via een telefoonlijn, glasvezelkabel of coaxkabel in de woning en cdit onverteert naar een digitaal signaal.
 \newline
 \newline
 \textbf{Coax kabel} is een twee polige kabel die instaat voor het overdragen van beeld en geluid. Deze signalen treden gemakkelijker binnen, waarbij het signaal op korte afstanden snel zwak wordt. 
@@ -465,10 +464,10 @@ De installatie van de Jumphost werd mogelijk door \cite{Win19_InstallationGuide}
 
 \section{Cisco Identity Services Engine enquête}
 \label{sec:enquête}
-Om een link te leggen met de resultaten van de uitgevoerde testen, werd een enquête of een formulier opstelt. Deze enquête is als onderliggende basis gebruikt bij de analyse van de resultaten die verkregen werden door de fysieke testen. Zoals in vorige hoofdstukken vermeld, is deze enquête een opiniepeiling. Waarbij een aantal vragen gesteld zijn aan personen die reeds gekend zijn met Cisco Identity Services Engine. Hierdoor is de doelgroep van deze enquête beperkt tot de Cisco Identity Services Engine specialisten.
+Om een link te leggen met de resultaten van de uitgevoerde proeven, werd een enquête of een formulier opsteld. Deze enquête is als onderliggende basis gebruikt bij de analyse van de resultaten die verkregen werden door de fysieke proeven. Zoals in vorige hoofdstukken vermeld, is deze enquête een opiniepeiling waarbij een aantal vragen gesteld zijn aan personen die reeds bekend zijn met Cisco Identity Services Engine. Hierdoor is de doelgroep van deze enquête beperkt tot de Cisco Identity Services Engine specialisten.
 \newline
 \newline
-Deze enquête is publiekelijk gemaakt via LinkedIn en via E-mail. Linkedin is een online sociaal netwerk dat is opgericht voor Vakmensen, die ongeveer 610 miljoen geregistreerden telt. Omdat deze enquête publiekelijk werd gemaakt op \cite{LinkedIn}, bevat dit formulier een aantal ‘failsave’ vragen. Deze ‘failsave’ vragen zijn bedoelt wanneer niet Cisco Identity Services Engine specialisten de enquête proberen in te vullen. Met als gevolg dat de kans op onjuiste ingevuld antwoorden verkleind werd.
+Deze enquête is publiekelijk gemaakt via LinkedIn en via E-mail. Linkedin is een online sociaal netwerk dat is opgericht voor Vakmensen, die ongeveer 610 miljoen geregistreerden telt. Omdat deze enquête publiekelijk werd gemaakt op \cite{LinkedIn}, bevat dit formulier een aantal ‘failsave’ vragen. Deze ‘failsave’ vragen zijn bedoeldt wanneer niet Cisco Identity Services Engine specialisten de enquête proberen in te vullen. Met als gevolg dat de kans op onjuiste ingevuld antwoorden verkleind werd.
 \newline
 \newline
 Dit formulier of enquête werd mogelijk gemaakt door Microsoft en Hogeschool Gent. Elke student heeft recht op een gelicentieerd Office 365 pakket gedurende zijn opleidingstraject. Het programma in kwestie noemt men \cite{MicrosoftForms} dat inbegrepen is in het Microsoft Office 365 pakket.
