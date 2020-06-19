@@ -118,14 +118,6 @@
   url          = {https://www.linkedin.com/home?originalSubdomain=be},
 }
 
-@Article{Telenet,
-  author       = {Telenet N.V.},
-  date         = {2020-05-08},
-  journaltitle = {Wie is Telenet N.V?},
-  title        = {Telenet website},
-  url          = {https://www.telenet.be},
-}
-
 @Article{CiscoISE_InstallationGuide,
   author       = {Cisco},
   date         = {2011-06-07},
@@ -194,7 +186,7 @@
   author       = {techtarget.com},
   date         = {2019-10-24},
   journaltitle = {What is RAID 10?},
-  title        = {RAID 10 (RAID 1+0)},
+  title        = {RAID 10},
   url          = {https://searchstorage.techtarget.com/definition/RAID-10-redundant-array-of-independent-disks},
 }
 
@@ -210,14 +202,14 @@
   author       = {techtarget.com},
   date         = {2019-10-15},
   journaltitle = {What is RAID 10?},
-  title        = {RAID-10-redundant-array-of-independent-disks},
+  title        = {RAID 10 redundant-array-of-independent-disks},
   url          = {https://searchstorage.techtarget.com/definition/RAID-10-redundant-array-of-independent-disks},
 }
 
 @Article{Rapid7Li,
   author       = {Rapid7 Nexpose},
   date         = {2016-09-22},
-  journaltitle = {InsightIDR & Nexpose Integrate for Total User & Asset Security Visibility},
+  journaltitle = {InsightIDR andNexpose Integrate for Total User Asset Security and Visibility},
   title        = {What is Rapid7 Nexpose},
   url          = {https://blog.rapid7.com/2016/09/22/insightidr-nexpose-integrate-for-total-user-asset-security-visibility/},
 }
@@ -252,6 +244,14 @@
   journaltitle = {Integration 802.1X with Cisco ISE},
   title        = {Configuring 802.1X with Cisco ISE and EAP-FAST},
   url          = {https://www.youtube.com/watch?v=dmvZN84GIgw},
+}
+
+@Article{Telenet2020,
+  author       = {Telenet},
+  date         = {2020-05-08},
+  journaltitle = {Wie is Telenet N.V?},
+  title        = {Telenet website},
+  url          = {https://www.telenet.be},
 }
 
 @Comment{jabref-meta: databaseType:biblatex;}
