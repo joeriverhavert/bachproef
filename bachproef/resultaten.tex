@@ -1,13 +1,13 @@
 
  \chapter{\IfLanguageName{dutch}{Resultaten}{Resultaten}}
 \label{ch:Resultaten}
-In dit hoofdstuk zullen de resultaten van de testen en de enquête verwerkt worden om tot een antwoord te komen van dit onderzoek. Hierbij zijn de resultaten van de Cisco Identity Services Engine omgeving opgedeeld in 'Port-based en Policy-based network access control' en 'Thread-Centric en Policy-based network access control '. Vervolgens zijn de enquête resultaten verwerkt met een aantal grafieken waarbij de resultaten terug te vinden zijn in Bijlage \ref{ch:Resultaten_enquête}. Meer informatie over de resultaten van de enquête vindt men in sectie \ref{sec:enqueteISe}.
+In dit hoofdstuk zullen de resultaten van de testen en de enquête verwerkt worden om tot een antwoord te komen van dit onderzoek. Hierbij zijn de resultaten van de Cisco Identity Services Engine omgeving opgedeeld in Port-based en Policy-based network access control en Thread-Centric en Policy-based network access control. Vervolgens zijn de enquête resultaten verwerkt met een aantal grafieken waarbij de resultaten terug te vinden zijn in Bijlage \ref{ch:Resultaten_enquête}. Meer informatie over de resultaten van de enquête vindt men in sectie \ref{sec:enqueteISe}.
 
 \section{Cisco Identity Services Engine omgeving}
 Zoals men ziet wordt Policy-based network access control steeds gecombineerd met Port-based en Thead-Centric network access control. Dit heeft als reden dat zowel Port-based, als voor Thread-Centric network access control, policy rules zijn toegepast. In elk van deze subsecties worden de resultaten van voor de implemenatie van de Cisco Identity Services Engine use cases  en na de implemenatie van deze use case toegelicht. Op die manier kan in hoofdstuk \ref{ch:conclusie} een conclusie gemaakt worden die een duidelijk antwoord biedt op dit onderzoek.  
 \subsection{Port-based en Policy-based network access control}
-Wanneer de use cases 'Port-based en Policy-based network access control' niet worden toegepast, dan kunnen gebruikers zich aansluiten op het netwerk zonder enige beveiliging. Dit is natuurlijk enkel mogelijk wanneer alle interfaces op het netwerk apparaat ingesteld zijn met het correcte vlan id. Anderzijds is het duidelijk dat eind apparaten zich eenvoudiger kunnen aansluiten op het netwerk zonder de implementatie van 'Port-based en Policy-based network access control' use cases.
-Als men de resultaten van de implemenatie van 'Port-based en Policy-based network access control' erbij halen, dan ziet men een duidelijk verschil in beveiliging ten opzichte van een netwerk zonder de use cases. Dit verschil is duidelijk te merken wanneer een gebruiker zich probeert aan te melden op het netwerk via één van de interfaces op de fysieke Cisco switch. Het eind apparaat wijst zichzelf een ip-adres toe van de vorm 169.254.x.x dat geen enkel compartiment van het netwerk kan bereiken. 
+Wanneer de use cases Port-based en Policy-based network access control niet worden toegepast, kunnen gebruikers zich aansluiten op het netwerk zonder enige beveiliging. Dit is natuurlijk enkel mogelijk wanneer alle interfaces op het netwerk apparaat ingesteld zijn met het correcte vlan ID. Anderzijds is het duidelijk dat eindapparaten zich eenvoudiger kunnen aansluiten op het netwerk zonder de implementatie van de Port-based en Policy-based network access control use cases.
+Als men de resultaten van de implementatie van Port-based en Policy-based network access control erbij halen, dan ziet men een duidelijk verschil in beveiliging ten opzichte van een netwerk zonder de use cases. Dit verschil is duidelijk te merken wanneer een gebruiker zich probeert aan te melden op het netwerk via één van de interfaces op de fysieke Cisco switch. Het eindapparaat wijst zichzelf een ip-adres toe van de vorm 169.254.x.x dat geen enkel compartiment van het netwerk kan bereiken. 
 \newline
 \newline
 Het is echter wanneer de 'Wired AutoConfig' services aanstaan dat men zich kan aanmelden op het netwerk door de volgende stappen uit te voeren: 
@@ -21,8 +21,8 @@ Het is echter wanneer de 'Wired AutoConfig' services aanstaan dat men zich kan a
 	\item Veranderd de 'authentication modus' naar 'gebruikers authenticatie'.
 \end{itemize}
 
-Als de eind gebruikers de juiste gebruikersnaam en wachtwoord ingeeft, wordt de gebruiker met zijn apparaat aangesloten op het netwerk. Belangrijk om te weten is dat er een policy rule zo ingesteld is dat alleen gebruikers van de groep 'Employees' toegang krijgen tot het netwerk. Het gebruik van de policy werd al eerder vernoemd in het hoofdstuk \ref{ch:Proof of concept}.
-Figuur \ref{fig:Test_gebruiker} toont aan dat wanneer men wenst in te loggen met de gebruikersnaam 'Test' geen toegang krijgt tot het netwerk. Gebruiker 'Test' bevindt zich niet in de groep 'Employees' en zal dus als gevolg geen toegang krijgen tot het netwerk. Dankzij het gebruik van policy rules wordt de proef aangetoond dat policy rules ook de vruchten kan plukken op beveiliging.
+Als de eindgebruiker de juiste gebruikersnaam en wachtwoord ingeeft, wordt de gebruiker met zijn apparaat aangesloten op het netwerk. Belangrijk om te weten is dat er een policy rule zo ingesteld is dat alleen gebruikers van de groep 'Employees' toegang krijgen tot het netwerk. Het gebruik van de policy rules werd al eerder vernoemd in het hoofdstuk \ref{ch:Proof of concept}.
+Figuur \ref{fig:Test_gebruiker} toont aan wanneer gebruiker 'Test' zich wenst in te loggen, dan krijgt hij geen toegang tot het netwerk. Gebruiker 'Test' bevindt zich niet in de groep 'Employees' en zal dus bijgevolg geen toegang krijgen tot het netwerk. Hierbij toont de proef aan dat het gebruik policy rules ook de vruchten kan plukken op beveiliging.
 
 \begin{figure}[H]
 	\centering
@@ -35,7 +35,7 @@ Figuur \ref{fig:Test_gebruiker} toont aan dat wanneer men wenst in te loggen met
 	\label{fig:Test_gebruiker}%
 \end{figure}
 
-Als men inlogt met een gebruiker die in de Cisco Identity Services Engine groep 'Employees' bevindt dan zal de gebruiker zonder problemen zich kunnen aansluiten op het netwerk. Dit wordt aangetoond in figuur \ref{fig:Test_gebruiker} waarbij een proef met de gebruiker 'TestV2' wordt uitgevoerd. Gebruiker 'TestV2' bevindt zich in groep 'Employees' waardoor het vanzelfsprekend is dat 'TestV2' met zijn eind apparaat met het netwerk kan verbinden. 
+Als men inlogt met een gebruiker die in de Cisco Identity Services Engine groep 'Employees' bevindt, zal de gebruiker zonder problemen kunnen aansluiten op het netwerk. Dit wordt aangetoond in figuur \ref{fig:Test_gebruiker} waarbij een proef met de gebruiker 'TestV2' wordt uitgevoerd. Gebruiker 'TestV2' bevindt zich in groep 'Employees' waardoor het vanzelfsprekend is dat 'TestV2' met zijn eindapparaat met het netwerk kan verbinden. 
 
 \begin{figure}[H]
 	\centering
@@ -49,31 +49,31 @@ Als men inlogt met een gebruiker die in de Cisco Identity Services Engine groep 
 	\label{fig:Test_gebruiker}%
 \end{figure}
 
-Vervolgens werd bij de tweede proef een policy rule geïmplementeerd die de toegang naar het netwerk vanuit de Cisco switch blokkeert op specifieke weekdagen.  De proef zou moeten aantonen wanneer gebruiker 'X' zich op woensdag aansluit op het netwerk dan zou gebruiker 'X' met zijn eindapparaat geen toegang krijgen.
-Op Figuur \ref{fig:Woensdag} is te zien dat gebruiker 'TestV4' met de 'Port-based network access control' use case zich probeert aan te sluiten op het netwerk. 
+Vervolgens werd bij de tweede proef een beleidsregel geïmplementeerd die de toegang naar het netwerk vanuit de Cisco switch blokkeert op specifieke weekdagen.  De proef zou moeten aantonen dat wanneer gebruiker 'X' zich op woensdag aansluit op het netwerk dan zou hij met zijn eindapparaat geen toegang krijgen.
+Op Figuur \ref{fig:Woensdag} is te zien dat gebruiker 'TestV4' met de Port-based network access control use case zich probeert aan te sluiten. 
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[height=0.20\textheight]{TestV4_Employee.png}
-	\caption{Grafiek resultaat vraag 2}
+	\caption{TestV4 sluit zich aan op het netwerk}
 	\label{fig:Woensdag}
 \end{figure}
 
-Het is al snel duidelijk dat Cisco Identity Services Engine toegang tot het netwerk blokkeert. Cisco Identity Services Engine registreert dat gebruiker 'TestV4' zich probeert aan te sluiten op het netwerk maar wordt vervolgens de toegang onmiddelijk ontnomen. Dit wordt aangetoond op figuur \ref{fig:failed} waarbij de toegang tot het netwerk voor gebruiker 'TestV4' geblokkeerd werd. 
+Het is al snel duidelijk dat Cisco Identity Services Engine de toegang tot het netwerk blokkeert. Cisco Identity Services Engine registreert dat gebruiker 'TestV4' zich probeert aan te sluiten op het netwerk maar hij wordt vervolgens de toegang onmiddelijk ontnomen. Dit wordt aangetoond op figuur \ref{fig:failed} waarbij de toegang tot het netwerk voor gebruiker 'TestV4' geblokkeerd werd. 
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[height=0.20\textheight]{UsersFailed_Suc.png}
-	\caption{Grafiek resultaat vraag 2}
+	\caption{Live Radius logs in Cisco Identity Services Engine }
 	\label{fig:failed}
 \end{figure}
 
-Om aan te tonen dat gebruiker 'TestV4' het netwerk werd ontnomen door de 'Disable\textunderscore at\textunderscore weekend' policy rule kan men het rapport terug vinden in figuur \ref{fig:failed2}. Op deze figuur is te zien dat 'Disable\textunderscore at\textunderscore weekend' het desbetreffende Authorization policy rule was die werd uitgevoerd dat resulteerde in geen toegang tot het netwerk. 
+Om aan te tonen dat gebruiker 'TestV4' het netwerk werd ontnomen door de beleidsregel: 'Disable\textunderscore at\textunderscore weekend', is het rapport terugvinden in figuur \ref{fig:failed2}. Op deze figuur is te zien dat 'Disable\textunderscore at\textunderscore weekend' de desbetreffende Authorization policy rule was die werd uitgevoerd en dit resulteerde in geen toegang tot het netwerk. 
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[height=0.20\textheight]{TestV4_failed.png}
-	\caption{Grafiek resultaat vraag 2}
+	\caption{Overview authorization profile met Disable\textunderscore at\textunderscore weekend}
 	\label{fig:failed2}
 \end{figure}
 
@@ -82,7 +82,7 @@ Ten slotte toont figuur \ref{fig:ping} aan dat het eindapparaat na blokkade van 
 \begin{figure}[H]
 	\centering
 	\includegraphics[height=0.20\textheight]{PingTestV4_failed.png}
-	\caption{Grafiek resultaat vraag 2}
+	\caption{Ping commando naar de Default Gateway}
 	\label{fig:ping}
 \end{figure}
 
@@ -91,59 +91,59 @@ In de sectie \ref{sec:trepo} worden de resultaten van Tread-Centric en Policy-ba
 
 \subsection{Thread-Centric en Policy-based network access control}
 \label{sec:trepo}
-In dit onderdeel van het onderzoek ligt de focus op de resultaten van de 'Thread-centric en policy-based network access control' use cases. De resultaten zouden moeten uitwijzen wanneer het eindapparaat een kwetsbaarheid niveau van 4 of meer behaald zou Cisco Identity Services Engine dit eindapparaat in quarantaine moeten plaatsen.
+In dit onderdeel van het onderzoek ligt de focus op de resultaten van de Thread-Centric en policy-based network access control use cases. De resultaten zouden moeten uitwijzen wanneer het eindapparaat een kwetsbaarheid niveau van 4 of meer behaald zou Cisco Identity Services Engine dit eindapparaat in quarantaine moeten plaatsen.
 \newline
 \newline
-Figuur \ref{fig:api} indiceert dat gebruiker 'TestV5' met zijn eindapparaat zonder enige problemen kan aansluiten op het netwerk dat gelinkt werd met het 'WIRED\textunderscore VA\textunderscore USER' Authorization Profile. Na enkele minuten ontvangt Cisco Identity Services Engine het rapport van Rapid7 Nexpose en merkt dat het eindapparaat een Nexpose-CVSS\textunderscore Base\textunderscore Score heeft van 6.2. Dit heeft een hogere score dan in de policy rule werd voorzien. Hierbij plaatst Cisco Identity Services Engine het eindapparaat in de 'WIRED\textunderscore VA\textunderscore QUARANTINE' Authorization Profile dat geen toegang heeft tot het netwerk. 
+Figuur \ref{fig:api} indiceert dat gebruiker 'TestV5' met zijn eindapparaat zonder enige problemen kan aansluiten op het netwerk dat gelinkt werd met het 'WIRED\textunderscore VA\textunderscore USER' Authorization Profile. Na enkele tientallen minuten ontvangt Cisco Identity Services Engine het rapport van Rapid7 Nexpose en merkt dat het eindapparaat een Nexpose-CVSS\textunderscore Base\textunderscore Score heeft van 6.2. Dit heeft een hogere score dan in de policy rule werd voorzien. Hierbij plaatst Cisco Identity Services Engine het eindapparaat in de 'WIRED\textunderscore VA\textunderscore QUARANTINE' Authorization Profile dat geen toegang heeft tot het netwerk. 
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[height=0.20\textheight]{ThreadSucceeded.png}
-	\caption{Grafiek resultaat vraag 2}
+	\includegraphics[width=1\textwidth]{ThreadSucceeded.png}
+	\caption{Live Radius logs na implementatie Thread-Centric AC}
 	\label{fig:api}
 \end{figure}
 
 Figuur \ref{fig:rapid} demonstreert het Rapid7 Nexpose scan rapport van asset '192.168.17.6' dat getriggerd werd door Cisco Identity Services Engine. Hierbij is een kwetsbaarheid weergegeven die een Base\textunderscore Score heeft van 6.2.
 \begin{figure}[H]
 	\centering
-	\includegraphics[height=0.20\textheight]{InsightVM_base.png}
-	\caption{Grafiek resultaat vraag 2}
+	\includegraphics[width=1\textwidth]{InsightVM_base.png}
+	\caption{Rapid7 Nexpose scan rapport van asset '192.168.17.6'}
 	\label{fig:rapid}
 \end{figure}
 Vervolgens kan men een Base\textunderscore Score van 6.2 terugvinden in het Authorization Profile rapport dat werd gegenereerd door Cisco Identity Services Engine. Zoals men ziet ligt dit volledig in lijn met de Base\textunderscore Score van het Rapid7 Nexpose scan rapport. Dit Authorization Profile rapport wordt weergegeven in figuur \ref{fig:detail}. 
 \begin{figure}[H]
 	\centering
-	\subfloat{{\includegraphics[width=6cm]{thread_overview_va_Quar.png} }}%
+	\subfloat{{\includegraphics[width=10cm]{thread_overview_va_Quar.png} }}%
 	\qquad
-	\subfloat{{\includegraphics[width=6cm]{thread_base.png} }}%
-	\caption{Proef resultaat met een employee gebruiker}%
+	\subfloat{{\includegraphics[width=10cm]{thread_base.png} }}%
+	\caption{Overview authorization profile rapport met TestV5}%
 	\label{fig:detail}%
 \end{figure}
 
-Bij dezen werden de resultaten van 'Thread-centric en Policy-based network access control' besproken. De resultaten hiervan zijn verwerkt in Hoofstuk \ref{ch:conclusie}.
+Bij dezen werden de resultaten van Thread-Centric en Policy-based network access control besproken. De resultaten hiervan zijn verwerkt in Hoofstuk \ref{ch:conclusie}.
 \section{Cisco Identity Services Engine enquête}
 \label{sec:enqueteISe}
 In deze sectie worden de resultaten van de enquête globaal besproken. Indien men meer informatie wenst over de resultaten per vraag kan men Bijlage \ref{ch:Resultaten_enquête} raadplegen.
 \newline
 \newline
-Bovenal mag men zeker tevreden zijn met de responsen van de enquête daarnevens kent de enquête 14 responsen op 2 weken tijd. Helaas beschikt men niet over het grote netwerk om de responsen van de enquête te doen verhogen. Een groter aantal responsen zou resulteren in een veel nauwkeuriger resultaat.  
+Bovenal mag men zeker tevreden zijn met de responsen van de enquête, daarnaast kent de enquête 14 responsen op 2 weken tijd. Helaas beschikt men niet over het grote netwerk om de responsen van de enquête te doen verhogen. Een groter aantal responsen zou resulteren in een veel nauwkeuriger resultaat.  
 \newline
 \newline
-78.6\% van de geënquêteerden is gekend met het Cisco Identity Services Engine product. De overige 21.4\% is niet gekend met het Cisco Identity Services Engine product en is dus niet vertrouwd met network access control technolgieën. Bij gevolg weten de geënquêteerden niet welk alternatief in hun omgeving wordt toegepast waardoor vraag 4 en 5 geen antwooren kent. Van de personen die gekend zijn met Cisco Identity Services Engine is bij iedereen het product geïmplementeerd in hun bedrijfsomgeving. Wanneer de vraag werd gesteld waar ze voor het eerst Cisco Identity Services Engine hebben gehoord. Dan reageert 71.4\% van de responsen met het antwoord 'In de organisatie'. Het overschot van de responsen is gelijk verdeelt tussen 'Tijdens een webinair', ‘Tijdens een opleiding' en 'Op het internet'. Figuur \ref{fig:vraag2} kan hiervoor geraadpleegd worden. 
+78.6\% van de geënquêteerden is gekend met het Cisco Identity Services Engine product. De overige 21.4\% is niet gekend met het Cisco Identity Services Engine product en is dus niet vertrouwd met network access control technolgieën. Bij gevolg weten de geënquêteerden niet welk alternatief in hun omgeving wordt toegepast waardoor vraag 4 en 5 geen antwoorden kent. Van de personen die gekend zijn met Cisco Identity Services Engine is bij iedereen het product geïmplementeerd in hun bedrijfsomgeving. Wanneer de vraag werd gesteld waar ze voor het eerst Cisco Identity Services Engine hebben gehoord, dan reageert 71.4\% van de responsen met het antwoord 'In de organisatie'. Het overschot van de responsen is gelijk verdeeld tussen 'Tijdens een webinair', ‘Tijdens een opleiding' en 'Op het internet'. Figuur \ref{fig:vraag2} kan hiervoor geraadpleegd worden. 
 \begin{figure}[H]
 	\centering
 	\includegraphics[height=0.20\textheight]{Vraag2.png}
 	\caption{Grafiek resultaat vraag 2}
 	\label{fig:vraag2}
 \end{figure}
-De resultaten waarbij men de rede waarom men Cisco Identity Services Engine heeft gekozen in een hun bedrijfsomgeving moest ingeven, ligt gelijkmatig verspreid. Wat wel duidelijk is dat het antwoord 'Omwille van de betere beheerbaarheid van eind apparaten.' een hoger percentage kent dan de overige antwoorden. Dit ziet met ook in grafiek \ref{fig:graf6} duidelijk terug.
+De resultaten van de rede waarom men Cisco Identity Services Engine heeft gekozen in een hun bedrijfsomgeving  ligt gelijkmatig verspreid. Wat wel duidelijk is dat het antwoord 'Omwille van de betere beheerbaarheid van eindapparaten.' een hoger percentage kent dan de overige antwoorden. Dit ziet met ook in grafiek \ref{fig:graf6} duidelijk terug.
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.50\textwidth]{Vraag6.png}
 	\caption{Grafiek resultaat vraag 6}
 	\label{fig:graf6}
 \end{figure}
-Uit vraag 7 kan afgeleidt worden dat 'Identiteits- en toegangsbeer','beleidshandhaving', 'Functionaliteit' en 'Uitbreidbaarheid' de belangrijkste kermerken zijn voor de keuze van het type network access control. Figuur \ref{fig:vraag7} toont daarbij de resultaten terug waarbij zeer duidelijk te zien is dat de vorige benoemde resultaten een zeer belangrijke rol spelen in de keuze van het network access control product. 
+Uit vraag 7 kan afgeleid worden dat 'Identiteits- en toegangsbeer','beleidshandhaving', 'Functionaliteit' en 'Uitbreidbaarheid' de belangrijkste kermerken zijn voor de keuze van het type network access control. Figuur \ref{fig:vraag7} toont daarbij de resultaten terug waarbij zeer duidelijk te zien is dat de vorige benoemde resultaten een zeer belangrijke rol spelen in de keuze van het network access control product. 
 
 \begin{figure}[H]
 	\centering
@@ -151,8 +151,8 @@ Uit vraag 7 kan afgeleidt worden dat 'Identiteits- en toegangsbeer','beleidshand
 	\caption{Grafiek resultaat vraag 7}
 	\label{fig:vraag7}
 \end{figure}
-
-Voor de volgende vraag kan men concluderen dat de veranderingen die bedrijven ondervinden na implementatie van Cisco Identity Services Engine verschillende zijn van responder tot responder. Globaal gezien komt dit wel overeen met elkaar dat Cisco Identity Services Engine de zichtbaar van eind apparaten op het netwerk verhogen. Een verbetering in troubleshooting is ook een van de veranderingen die de geënquêteerden ondervonden. Meer informatie over deze antwoorden is terug te vinden in bijlage \ref{tab:vraag8}. Vervolgens vindt 54.5\% van de geënquêteerden dat Cisco Identity Services Engine het product gelijkaardig vindt ten opzichte van andere network access control. Het is echter zo dat 9.1\% van de responders vindt dat Cisco Identity Services Engine slechter is dan zijn concurrenten. De rede achter dit kan helaas niet onbeantwoord worden. Verder bevat 36.4\% van de antwoorden het antwoord 'Beter'. Figuur \ref{fig:vraag9} geeft deze verwoording visueel terug. 
+\newpage
+Voor de volgende vraag kan men concluderen dat de veranderingen die bedrijven ondervinden na implementatie van Cisco Identity Services Engine verschillende zijn van responder tot responder. Globaal gezien komt dit wel overeen met elkaar dat Cisco Identity Services Engine de zichtbaar van eindapparaten op het netwerk verhogen. Een verbetering in troubleshooting is ook één van de veranderingen die de geënquêteerden ondervonden. Meer informatie over deze antwoorden is terug te vinden in bijlage \ref{tab:vraag8}. Vervolgens vindt 54.5\% van de geënquêteerden dat Cisco Identity Services Engine het product gelijkaardig vindt ten opzichte van andere network access control producten. Het is echter zo dat 9.1\% van de responders vindt dat Cisco Identity Services Engine slechter is dan zijn concurrenten. De rede hierachter kan helaas niet onbeantwoord worden. Verder bevat 36.4\% van de antwoorden het antwoord 'Beter'. Figuur \ref{fig:vraag9} geeft deze verwoording visueel terug. 
 
 \begin{figure}[H]
 	\centering
@@ -161,22 +161,23 @@ Voor de volgende vraag kan men concluderen dat de veranderingen die bedrijven on
 	\label{fig:vraag9}
 \end{figure}
 
-De resultaten van de vraag: 'Wat zijn volgens u de meeste voorkomende modules of use cases van Cisco Identity Services Engine?', zijn in figuur \label{fig:vraag10} terug te vinden. Hierbij is duidelijk te zien dat merendeel van de geënquêteerden vindt dat 'Identity-based network access control' de belangrijkste use case van Cisco Identity Services Engine. Vervolgens komt het 'Policy-based network access control' dat daarna gevolgd wordt door het 'Thread-Centric network access control'. Hieruit kan men concluderen dat de proef een onderzoek uitvoert naar de bijna belangrijkste use cases. Het is toch verbazend dat slecht 7.7\% van de personen koos voor een 'Port-based network access control' use case. 
+De resultaten van de vraag: 'Wat zijn volgens u de meeste voorkomende modules of use cases van Cisco Identity Services Engine?', zijn in figuur \ref{fig:vraag10} terug te vinden. Hierbij is duidelijk te zien dat het merendeel van de geënquêteerden vindt dat Identity-based network access control de belangrijkste use case van Cisco Identity Services Engine. Vervolgens komt het Policy-based network access control dat daarna gevolgd wordt door het Thread-Centric network access control. Het is toch verbazend dat slecht 7.7\% van de personen koos voor een Port-based network access control use case. 
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[height=0.30\textheight]{Vraag10.png}
 	\caption{Grafiek resultaat vraag 10}
+	\label{fig:vraag10}
 \end{figure}
 
-Daarnaast blijkt ook dat 54.5\% zegt dat Cisco Identity Services Engine nadelen kent binnen een netwerk. Deze nadelen uiten zich als 'Certificate updates require nac to shut down', 'het netwerk is afhankelijk van de nac oplossing', 'Instabiliteit van connecties met sommige systemen', enzovoort. Verder werd er ook heel wat voordelen opgesomd door de vakspecalisten die weergegeven zijn in \ref{tab:vraag11}. Alle antwoorden zijn terug te vinden in bijlage \ref{tab:vraag13}.
+Daarnaast blijkt ook dat 54.5\% zegt dat Cisco Identity Services Engine nadelen kent binnen een netwerk. Deze nadelen uiten zich als 'Certificate updates require nac to shut down', 'het netwerk is afhankelijk van de nac oplossing', 'Instabiliteit van connecties met sommige systemen', enzovoort. Verder werden er ook heel wat voordelen opgesomd door de vakspecalisten die weergegeven zijn in bijlage \ref{tab:vraag11}. Alle antwoorden zijn terug te vinden in bijlage \ref{tab:vraag13}.
 \newline
 \newline
-Uit vragen 14 en 15 is gebleken dat Cisco Identity Services Engine een logische keuze is ten opzichte van andere network access control producten. De resultaten van vraag 14 is 90.9\% voor het antwoord 'Ja' en 9.1\% met het antwoord 'Neen'. Vraag 15 toont aan dat 100\% van de vakspecalisten vindt dat een network access control product noodzakelijk is in een bedrijfsomgeving. Hieruit kan men concluderen dat een network access control zoals Cisco Identity Services Engine voor velen een echte must is.
-Hierbij zijn de Antwoordenterug te vinden in bijlage \ref{tab:vraag13}. Verder werd er ook heel wat voordelen opgesomd door de vakspecalisten die weergegeven zijn in \ref{tab:vraag11}.
+Uit vragen 14 en 15 is gebleken dat Cisco Identity Services Engine een logische keuze is ten opzichte van andere network access control producten. Voor de resultaten van vraag 14 is 90.9\% voor het antwoord 'Ja' en antwoordt 9.1\% met het antwoord 'Neen'. Vraag 15 toont aan dat 100\% van de vakspecalisten vinden dat een network access control product noodzakelijk is in een bedrijfsomgeving. Hieruit kan men concluderen dat een network access control zoals Cisco Identity Services Engine voor velen een echte must is.
+Hierbij zijn de antwoorden terug te vinden in bijlage \ref{tab:vraag13}. Verder werd er ook heel wat voordelen opgesomd door de vakspecalisten die weergegeven zijn in bijlage \ref{tab:vraag11}.
 \newline
 \newline
-18.2\% van de personen die de enquête invulden vinden dat er functionaliteiten ontbreken in Cisco Identity Services Engine. De betreffende missende functionaliteiten zijn 'Industriële gerichtheid, incl. goede support voor staticshe ip adressen.' en 'Saml integratie in een samenwerking met Azure AD en Captive portal voor byod.’.
+18.2\% van de personen die de enquête invulden vinden dat er functionaliteiten ontbreken in Cisco Identity Services Engine. De betreffende missende functionaliteiten zijn 'Industriële gerichtheid, incl. goede support voor statische ip adressen.' en 'Saml integratie in een samenwerking met Azure AD en Captive portal voor byod.’.
 
 
 Tot slot kreeg Cisco Identity Services Engine een gemiddelde beoordeling van 3.91 op 5 waarbij 90.9\% van de geënquêteerden dit product zou aanbevelen aan anderen.

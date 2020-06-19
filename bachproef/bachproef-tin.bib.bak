@@ -19,69 +19,73 @@
 
 @Article{Zakiah2017,
   author       = {Zakiah Zulkefli},
-  title        = {Security and Privacy Risks Awareness for Bring Your Own Device (BYOD) Paradigm},
+  date         = {2019-03-14},
   journaltitle = {Security and Privacy Risks Awareness for Bring Your Own Device (BYOD) Paradigm},
-  year         = {2017},
+  title        = {Security and Privacy Risks Awareness for Bring Your Own Device (BYOD) Paradigm},
   url          = {https://pdfs.semanticscholar.org/f96f/50036cea811be2c79dc709bfdd5f4c3d2558.pdf},
+  year         = {2017},
 }
 
 @Article{Salim2016,
   author       = {Salim Hariri},
-  title        = {IoT Security Framework for Smart Cyber Infrastructures},
+  date         = {2015-01-01},
   journaltitle = {IoT Security Framework for Smart Cyber Infrastructures},
-  year         = {2016},
+  title        = {IoT Security Framework for Smart Cyber Infrastructures},
   url          = {https://ieeexplore.ieee.org/abstract/document/7789475},
+  year         = {2016},
 }
 
 @Article{ArubaCPPM,
   author       = {ArubaCPPM},
-  date         = {2020},
+  date         = {2020-01-01},
   journaltitle = {Wat is ArubaCPPM?},
   title        = {Wat is Aruba ClearPass Policy Manager?},
-  url          = {https://www.arubanetworks.com/products/security/network-access-control/s},
+  url          = {https://www.arubanetworks.com/products/security/network-access-control/},
 }
 
 @Article{Portnox,
   author       = {Portnox},
-  title        = {Wat is Portnox?},
+  date         = {2007-01-01},
   journaltitle = {Wat is Portnox?},
-  year         = {2020},
+  title        = {Wat is Portnox?},
   url          = {https://www.portnox.com/use-cases/network-access-control/},
+  year         = {2020},
 }
 
 @Article{ISE,
   author       = {Cisco},
-  title        = {Wat is Cisco ISE?},
+  date         = {2011-07-11},
   journaltitle = {Wat is Cisco ISE?},
-  year         = {2020},
+  title        = {Wat is Cisco ISE?},
   url          = {https://www.cisco.com/c/dam/en/us/products/collateral/security/identity-services-engine/cisco-it-and-ise.pdf},
+  year         = {2020},
 }
 
 @Article{ABAC,
   author       = {webfarmr},
-  title        = {What is Policy-Based Access Control?},
+  date         = {2009-06-05},
   journaltitle = {What is Policy-Based Access Control?},
-  year         = {2019},
-  date         = {2009-06},
+  title        = {What is Policy-Based Access Control?},
   url          = {https://www.webfarmr.eu/2019/11/what-is-policy-based-access-control/},
+  year         = {2019},
 }
 
 @Article{TCNAC,
   author       = {Cisco},
-  title        = {Chapter: Configure Threat Centric NAC Service},
+  date         = {2015-03-31},
   journaltitle = {Chapter: Configure Threat Centric NAC Service},
-  year         = {2020},
-  date         = {2003-19},
+  title        = {Chapter: Configure Threat Centric NAC Service},
   url          = {https://www.cisco.com/c/en/us/td/docs/security/ise/2-1/admin_guide/b_ise_admin_guide_21/b_ise_admin_guide_21_chapter_0100011.html},
+  year         = {2020},
 }
 
 @Article{PBAC,
   author       = {techhup},
-  title        = {Port-Based and User-Based Access Control (802.1X)},
+  date         = {2001-05-06},
   journaltitle = {Port-Based and User-Based Access Control (802.1X)},
-  year         = {2019},
-  date         = {2001-16},
+  title        = {Port-Based and User-Based Access Control (802.1X)},
   url          = {https://techhub.hpe.com/eginfolib/networking/docs/switches/K-KA-KB/16-01/5200-0122_access_security_guide/content/ch19.html},
+  year         = {2019},
 }
 
 @Book{DanielV,
@@ -99,7 +103,7 @@
 }
 
 @Article{Excel,
-  author       = {Microsoft},
+  author       = {Excel},
   date         = {1985-09-30},
   journaltitle = {Wat is Excel?},
   title        = {Excel software},
@@ -180,7 +184,7 @@
 
 @Article{PortnoxLogo,
   author       = {Portnox.com},
-  date         = {2013-0603},
+  date         = {2013-06-03},
   journaltitle = {Logo Portnox},
   title        = {Access Layers Announced New Name, Logo and Look},
   url          = {https://www.portnox.com/press-releases/access-layers-announced-new-name-logo-and-look/},
@@ -192,6 +196,62 @@
   journaltitle = {What is RAID 10?},
   title        = {RAID 10 (RAID 1+0)},
   url          = {https://searchstorage.techtarget.com/definition/RAID-10-redundant-array-of-independent-disks},
+}
+
+@Article{VMwareESXI,
+  author       = {abraxax.com},
+  date         = {2013-04-22},
+  journaltitle = {Wat is een VMware ESX en ESXi server?},
+  title        = {VMware ESX en ESXi server},
+  url          = {https://abraxax.com/content/vmware-esx-en-esxi-server},
+}
+
+@Article{RAIDLi,
+  author       = {techtarget.com},
+  date         = {2019-10-15},
+  journaltitle = {What is RAID 10?},
+  title        = {RAID-10-redundant-array-of-independent-disks},
+  url          = {https://searchstorage.techtarget.com/definition/RAID-10-redundant-array-of-independent-disks},
+}
+
+@Article{Rapid7Li,
+  author       = {Rapid7 Nexpose},
+  date         = {2016-09-22},
+  journaltitle = {InsightIDR & Nexpose Integrate for Total User & Asset Security Visibility},
+  title        = {What is Rapid7 Nexpose},
+  url          = {https://blog.rapid7.com/2016/09/22/insightidr-nexpose-integrate-for-total-user-asset-security-visibility/},
+}
+
+@Article{rapid7,
+  author       = {Rapid7},
+  date         = {2014-10-08},
+  journaltitle = {Rapid7},
+  title        = {Website Rapid7},
+  url          = {https://www.rapid7.com/},
+}
+
+@Article{winISE,
+  author       = {Cisco.com},
+  date         = {2015-10-15},
+  journaltitle = {Active Directory Configuration in Cisco ISE},
+  title        = {Integration AD with Cisco ISE},
+  url          = {https://www.cisco.com/c/en/us/td/docs/security/ise/2-3/ise_active_directory_integration/b_ISE_AD_integration_2x.html},
+}
+
+@Article{LinkedTIN,
+  author       = {Wikipedia},
+  date         = {2019-03-01},
+  journaltitle = {Wat is LinkedIn?},
+  title        = {Betekenis LinkedIn},
+  url          = {https://en.wikipedia.org/wiki/LinkedIn},
+}
+
+@Article{thread_yt,
+  author       = {tharakak},
+  date         = {2014-03-30},
+  journaltitle = {Integration 802.1X with Cisco ISE},
+  title        = {Configuring 802.1X with Cisco ISE and EAP-FAST},
+  url          = {https://www.youtube.com/watch?v=dmvZN84GIgw},
 }
 
 @Comment{jabref-meta: databaseType:biblatex;}

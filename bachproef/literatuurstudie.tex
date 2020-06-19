@@ -118,7 +118,7 @@ Nu de termen zoals Bring Your Own Device en Internet of Things uitgeklaard zijn,
 Een network access control is een type cyber security technologie waarmee ondernemingen beleidsregels kunnen implementeren en definiëren die de toegang van eindapparaten tot een bedrijfsnetwerk kunnen regelen. Tegelijkertijd biedt een network access control product een zichtbaarheid van apparaten die toegang proberen te krijgen met het netwerk, zodanig dat de veiligheid van het netwerk beter in kaart kan gebracht worden. Vervolgens wordt het belang van de implementatie van een network access control product in een netwerk toegelicht.
 \newline
 \newline 
-Werknemers die met hun internet verbonden apparaten regelmatig inloggen op andere netwerken, maken de infrastructuur van hun eigen onderneming kwetsbaarder. Deze reizende systemen hebben een grotere kans om geïnfecteerd te worden met malware, dan apparatuur dat zich steeds binnen de muren van de onderneming bevindt. Een network access control product kan dus een oplossing bieden wanneer geïnfecteerde systemen toegang proberen te verschaffen in het netwerk. Dit is mogelijk dankzij Cisco's nieuwe 2.2 feature, namelijk '\textit{Thread-Centric network access control}'. 
+Werknemers die met hun internet verbonden apparaten regelmatig inloggen op andere netwerken, maken de infrastructuur van hun eigen onderneming kwetsbaarder. Deze reizende systemen hebben een grotere kans om geïnfecteerd te worden met malware, dan apparatuur dat zich steeds binnen de muren van de onderneming bevindt. Een network access control product kan dus een oplossing bieden wanneer geïnfecteerde systemen toegang proberen te verschaffen in het netwerk. Dit is mogelijk dankzij Cisco's nieuwe 2.2 feature, namelijk Thread-Centric network access control. 
 \newline
 \newline 
 De definitie en het belang van een network access control product werden alvast uitgelegd. In onderstaande alinea’s wordt er een woordje uitleg gegeven over drie nauwe, bijeenliggende network access control technologieën. Cisco Identity Services Engine werd gekozen in samenspraak met Axians. ‘Aruba ClearPass Policy Manager’ en ‘Portnox’ zijn network access control technologieën die willekeurig gekozen zijn op het internet. Vervolgens is er op het einde een kleine conclusie geschreven die dieper ingaat waarom er uiteindelijk gekozen werd voor Cisco Identity Services Engine en niet voor de overige network access control technologieën.
@@ -165,25 +165,25 @@ Door de unieke architectuur van Cisco Identity Services Engine kunnen bedrijven 
 \newpage
 \subsubitem{\bf Policy-based network access control}
 \newline
-\textit{Policy-based network access control}(\cite{ABAC}), ook wel Attribute-based network access control genoemd. Dit type access control definieert een toegang controleparadigma waarbij toegangsrechten worden verleend aan gebruikers door het gebruik van een beleid dat attributen combineert. Dit model ondersteunt de Booleaanse logica waarin beleidsregels "ALS en DAN" -instructies bevatten over wie het verzoek, de bron en de actie uitvoert.
+Policy-based network access control(\cite{ABAC}), ook wel Attribute-based network access control genoemd. Dit type access control definieert een toegang controleparadigma waarbij toegangsrechten worden verleend aan gebruikers door het gebruik van een beleid dat attributen combineert. Dit model ondersteunt de Booleaanse logica waarin beleidsregels "ALS en DAN" -instructies bevatten over wie het verzoek, de bron en de actie uitvoert.
 
 \subsubitem{\bf Threat-Centric network access control}
 \newline
-Het opstellen van de toegang controleparadigma op basis van de bedreiging- en kwetsbaarheid kernmerken is mogelijk via de \textit{Thread-Centric network access control} Identity Service Engine(\cite{TCNAC}) functie. \textit{Thread-Centric network access control} ontvangt zijn bedreigingen- en kwetsbaarheidskernmerken op basis van één van de bedreigings- en kwetsbaarheids adapters. Het ernstniveau van deze bedreigingen en resultaten kunnen gebruikt worden om het toegangsniveau van een eindapparaat of eindgebruiker dynamisch te regelen.
+Het opstellen van de toegang controleparadigma op basis van de bedreiging- en kwetsbaarheid kernmerken is mogelijk via de Thread-Centric network access control Identity Service Engine(\cite{TCNAC}) functie. Thread-Centric network access control ontvangt zijn bedreigingen- en kwetsbaarheidskernmerken op basis van één van de bedreigings- en kwetsbaarheids adapters. Het ernstniveau van deze bedreigingen en resultaten kunnen gebruikt worden om het toegangsniveau van een eindapparaat of eindgebruiker dynamisch te regelen.
 \newline
 \newline
-Met andere woorden als een eindapparaat besmet zou raken met een virus, dan schiet de \textit{Threat-Centric network access control} functie in actie door dit eindapparaat in een vlan plaatsen die het netwerk niet verder kan infecteren. 
+Met andere woorden als een eindapparaat besmet zou raken met een virus, dan schiet de Threat-Centric network access control functie in actie door dit eindapparaat in een vlan plaatsen die het netwerk niet verder kan infecteren. 
 
 \subsubitem{\bf Port-based network access control}
 \newline
-\cite{PBAC} definieert een client-server gebaseerde toegangscontrole en een authenticatieprotocol dat elke client verifieert voordat een service wordt aangeboden. Wanneer niet geautoriseerde apparaten verbinding wensten te maken met een openbare toegankelijke poort, dan laat de \textit{Port-based network access control}  functie geen gewoon verkeer toe.
+\cite{PBAC} definieert een client-server gebaseerde toegangscontrole en een authenticatieprotocol dat elke client verifieert voordat een service wordt aangeboden. Wanneer niet geautoriseerde apparaten verbinding wensten te maken met een openbare toegankelijke poort, dan laat de Port-based network access control functie geen gewoon verkeer toe.
 \newline
 \newline
 Tot deze client is geverifieerd, staat 802.1x-toegangscontrole alleen Extensible Authentication Protocol over het Local Area Network toe via de poort waarmee de client is verbonden. Wanneer de authenticatie geslaagd is, kan normaal verkeer de poort passeren.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=1\textwidth]{homepage_ise.png}
+	\includegraphics[width=0.9\textwidth]{homepage_ise.png}
 	\caption{Home pagina van Cisco Identity Services Engine}
 	\label{fig:homeISE}
 \end{figure}
